@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{DBA9F375-6E6E-4A29-846B-45A09495F427}</ProjectGuid>
+    <RootNamespace>Paradox</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>
+    </ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../External Libs/GLFW/include;$(SolutionDir)/../../External Libs/GLEW/include;$(SolutionDir)/../../External Libs/GLM;$(SolutionDir)/../../External Libs/Assimp/include;$(SolutionDir)/../../External Libs/OpenAL/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../External Libs/GLFW/lib-vc2015;$(SolutionDir)/../../External Libs/GLEW/lib/Release/Win32;$(SolutionDir)/../../External Libs/Assimp/lib;$(SolutionDir)/../../External Libs/OpenAL/libs/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../External Libs/GLFW/include;$(SolutionDir)/../../External Libs/GLEW/include;$(SolutionDir)/../../External Libs/GLM;$(SolutionDir)/../../External Libs/Assimp/include;$(SolutionDir)/../../External Libs/OpenAL/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../External Libs/GLFW/lib-vc2015;$(SolutionDir)/../../External Libs/GLEW/lib/Release/Win32;$(SolutionDir)/../../External Libs/Assimp/lib;$(SolutionDir)/../../External Libs/OpenAL/libs/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../External Libs/GLFW/include;$(SolutionDir)/../../External Libs/GLEW/include;$(SolutionDir)/../../External Libs/GLM;$(SolutionDir)/../../External Libs/Assimp/include;$(SolutionDir)/../../External Libs/OpenAL/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../External Libs/GLFW/lib-vc2015;$(SolutionDir)/../../External Libs/GLEW/lib/Release/Win32;$(SolutionDir)/../../External Libs/Assimp/lib;$(SolutionDir)/../../External Libs/OpenAL/libs/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../External Libs/GLFW/include;$(SolutionDir)/../../External Libs/GLEW/include;$(SolutionDir)/../../External Libs/GLM;$(SolutionDir)/../../External Libs/Assimp/include;$(SolutionDir)/../../External Libs/OpenAL/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../External Libs/GLFW/lib-vc2015;$(SolutionDir)/../../External Libs/GLEW/lib/Release/Win32;$(SolutionDir)/../../External Libs/Assimp/lib;$(SolutionDir)/../../External Libs/OpenAL/libs/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;assimp-vc140-mt.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Components\Terrain.cpp" />
+    <ClCompile Include="src\Physics\AABBCollider.cpp" />
+    <ClCompile Include="src\Physics\Collider.cpp" />
+    <ClCompile Include="src\core\PhysicsEngine.cpp" />
+    <ClCompile Include="src\Components\PhysicsObject.cpp" />
+    <ClCompile Include="src\Physics\PlaneCollider.cpp" />
+    <ClCompile Include="src\Physics\SphereCollider.cpp" />
+    <ClCompile Include="src\Audio\AudioSource.cpp" />
+    <ClCompile Include="src\Audio\Audio.cpp" />
+    <ClCompile Include="src\Components\AnimatedComponent.cpp" />
+    <ClCompile Include="src\graphics\MeshLoaders\AnimatedModelLoader\AnimatedModel.cpp" />
+    <ClCompile Include="src\maths\quaternion.cpp" />
+    <ClCompile Include="src\graphics\MeshLoaders\Model.cpp" />
+    <ClCompile Include="src\graphics\Resource\MeshResource.cpp" />
+    <ClCompile Include="src\graphics\GBuffer.cpp" />
+    <ClCompile Include="src\core\Scene.cpp" />
+    <ClCompile Include="src\core\RenderingEngine.cpp" />
+    <ClCompile Include="src\Components\Component.cpp" />
+    <ClCompile Include="src\core\GameObject.cpp" />
+    <ClCompile Include="src\Components\Material.cpp" />
+    <ClCompile Include="src\Components\Camera.cpp" />
+    <ClCompile Include="src\graphics\Mesh.cpp" />
+    <ClCompile Include="src\Components\MeshRenderer.cpp" />
+    <ClCompile Include="src\core\CoreEngine.cpp" />
+    <ClCompile Include="src\Components\Transform.cpp" />
+    <ClCompile Include="src\graphics\Buffer.cpp" />
+    <ClCompile Include="src\graphics\ElementBuffer.cpp" />
+    <ClCompile Include="src\Components\Renderer.cpp" />
+    <ClCompile Include="src\core\Input.cpp" />
+    <ClCompile Include="src\Lights\DirectionalLight.cpp" />
+    <ClCompile Include="src\Lights\Light.cpp" />
+    <ClCompile Include="src\Lights\PointLight.cpp" />
+    <ClCompile Include="src\Lights\SpotLight.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\maths\mat4.cpp" />
+    <ClCompile Include="src\maths\vec2.cpp" />
+    <ClCompile Include="src\maths\vec3.cpp" />
+    <ClCompile Include="src\maths\vec4.cpp" />
+    <ClCompile Include="src\graphics\VertexArray.cpp" />
+    <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
+    <ClCompile Include="src\Physics\TerrainCollider.cpp" />
+    <ClCompile Include="src\Shaders\Shader.cpp" />
+    <ClCompile Include="src\Shaders\SpotLightShader.cpp" />
+    <ClCompile Include="src\TestGame\Behaviors\BallBehavior.cpp" />
+    <ClCompile Include="src\TestGame\Behaviors\PlayerBehavior.cpp" />
+    <ClCompile Include="src\TestGame\Behaviors\PlayerStateMachine\NormalState.cpp" />
+    <ClCompile Include="src\TestGame\Behaviors\PlayerStateMachine\StelthState.cpp" />
+    <ClCompile Include="src\TestGame\Behaviors\SteeringBehavior.cpp" />
+    <ClCompile Include="src\TestGame\TestGame.cpp" />
+    <ClCompile Include="src\graphics\Resource\TextureResource.cpp" />
+    <ClCompile Include="src\Audio\WaveData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Components\Terrain.h" />
+    <ClInclude Include="src\Physics\TerrainCollider.h" />
+    <ClInclude Include="src\TestGame\Behaviors\PlayerStateMachine\NormalState.h" />
+    <ClInclude Include="src\TestGame\Behaviors\PlayerStateMachine\PlayerState.h" />
+    <ClInclude Include="src\Physics\PhysicsMaterial.h" />
+    <ClInclude Include="src\Physics\AABBCollider.h" />
+    <ClInclude Include="src\Physics\Collider.h" />
+    <ClInclude Include="src\Physics\IntersectData.h" />
+    <ClInclude Include="src\core\PhysicsEngine.h" />
+    <ClInclude Include="src\Components\PhysicsObject.h" />
+    <ClInclude Include="src\Physics\PlaneCollider.h" />
+    <ClInclude Include="src\Physics\SphereCollider.h" />
+    <ClInclude Include="src\Audio\AudioSource.h" />
+    <ClInclude Include="src\Audio\Audio.h" />
+    <ClInclude Include="src\Components\AnimatedComponent.h" />
+    <ClInclude Include="src\Components\Behavior.h" />
+    <ClInclude Include="src\core\Game.h" />
+    <ClInclude Include="src\graphics\MeshLoaders\AnimatedModelLoader\AnimatedModel.h" />
+    <ClInclude Include="src\graphics\MeshLoaders\AnimatedModelLoader\Bone.h" />
+    <ClInclude Include="src\maths\quaternion.h" />
+    <ClInclude Include="src\graphics\MeshLoaders\Model.h" />
+    <ClInclude Include="src\graphics\Resource\ShaderResource.h" />
+    <ClInclude Include="src\graphics\Resource\MeshResource.h" />
+    <ClInclude Include="src\graphics\Resource\ValueMap.h" />
+    <ClInclude Include="src\graphics\GBuffer.h" />
+    <ClInclude Include="src\core\Scene.h" />
+    <ClInclude Include="src\core\RenderingEngine.h" />
+    <ClInclude Include="src\Components\Component.h" />
+    <ClInclude Include="src\core\GameObject.h" />
+    <ClInclude Include="src\Components\Material.h" />
+    <ClInclude Include="src\core\Time.h" />
+    <ClInclude Include="src\Components\Camera.h" />
+    <ClInclude Include="src\graphics\Mesh.h" />
+    <ClInclude Include="src\Components\MeshRenderer.h" />
+    <ClInclude Include="src\core\CoreEngine.h" />
+    <ClInclude Include="src\Components\Transform.h" />
+    <ClInclude Include="src\graphics\Buffer.h" />
+    <ClInclude Include="src\graphics\ElementBuffer.h" />
+    <ClInclude Include="src\graphics\Renderable.h" />
+    <ClInclude Include="src\Components\Renderer.h" />
+    <ClInclude Include="src\core\Input.h" />
+    <ClInclude Include="src\Lights\DirectionalLight.h" />
+    <ClInclude Include="src\Lights\Light.h" />
+    <ClInclude Include="src\Lights\PointLight.h" />
+    <ClInclude Include="src\Lights\SpotLight.h" />
+    <ClInclude Include="src\maths\mat4.h" />
+    <ClInclude Include="src\maths\maths.h" />
+    <ClInclude Include="src\maths\vec2.h" />
+    <ClInclude Include="src\maths\vec3.h" />
+    <ClInclude Include="src\maths\vec4.h" />
+    <ClInclude Include="src\graphics\VertexArray.h" />
+    <ClInclude Include="src\graphics\Texture.h" />
+    <ClInclude Include="src\Shaders\Shader.h" />
+    <ClInclude Include="src\Shaders\SpotLightShader.h" />
+    <ClInclude Include="src\TestGame\Behaviors\BallBehavior.h" />
+    <ClInclude Include="src\TestGame\Behaviors\PlayerBehavior.h" />
+    <ClInclude Include="src\TestGame\Behaviors\PlayerStateMachine\StealthState.h" />
+    <ClInclude Include="src\TestGame\Behaviors\SteeringBehavior.h" />
+    <ClInclude Include="src\utils\fileutils.h" />
+    <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\TestGame\TestGame.h" />
+    <ClInclude Include="src\graphics\Resource\TextureResource.h" />
+    <ClInclude Include="src\Audio\WaveData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\MainShader.frag" />
+    <None Include="Shaders\MainShader.vert" />
+    <None Include="src\Shaders\GLSLShaders\DirectLightShader.frag" />
+    <None Include="src\Shaders\GLSLShaders\DirectLightShader.vert" />
+    <None Include="src\Shaders\GLSLShaders\GBufferAnimationShader.vert" />
+    <None Include="src\Shaders\GLSLShaders\GBufferShader.frag" />
+    <None Include="src\Shaders\GLSLShaders\GBufferShader.vert" />
+    <None Include="src\Shaders\GLSLShaders\MainShader.frag" />
+    <None Include="src\Shaders\GLSLShaders\MainShader.vert" />
+    <None Include="src\Shaders\GLSLShaders\PointLightShader.frag" />
+    <None Include="src\Shaders\GLSLShaders\ShaderDependencies\LightingData.glsl" />
+    <None Include="src\Shaders\GLSLShaders\SpotLightShader.frag" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
