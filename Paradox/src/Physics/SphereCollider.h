@@ -14,7 +14,7 @@ public:
 
 	SphereCollider(vec3 center, float radius); 
 	~SphereCollider();
-	IntersectData intersectSphereCollider(const SphereCollider& other); 
+	auto intersectSphereCollider(const SphereCollider& other) -> IntersectData;			//lambda function 
 
 	//setters 
 	void  setRadius(float radius); 
@@ -23,9 +23,9 @@ public:
 
 	void transform(const vec3& translation) override;
 	//getters
-	const float getRadius() const; 
-	 const vec3 getCenter()  const override;
-
+	const float getRadius() const ; 
+	 auto getCenter()  const -> const vec3 override;
+	 
 private: 
 
 };

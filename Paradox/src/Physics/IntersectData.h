@@ -9,22 +9,28 @@ namespace Paradox {
 		private:
 
 		public:
-			explicit IntersectData(bool doesIntersect , vec3 direction) {
+			explicit IntersectData(bool doesIntersect , vec3 direction,float distance) {
 				m_DoesIntersect = doesIntersect; 
-				m_Direction = direction; 
+				m_Direction = direction;
+				m_Distance = distance; 
 			}
 
-			~IntersectData() {}
+			~IntersectData() = default;
 			//only getters for this class 
-			inline const bool getdoesIntersect() const {
+			inline auto getdoesIntersect() const -> const bool {
 				return m_DoesIntersect; 
 
 			}
-			inline const vec3 getDirection() const {
+			inline auto getDirection() const -> const vec3 {
 				return m_Direction;
+			}
+			inline auto getDistance() const ->const float {
+				return m_Distance;
 			}
 private: 
 	vec3 m_Direction;
+	float m_Distance;
+
 	bool m_DoesIntersect;
 
 };

@@ -1,5 +1,5 @@
 #pragma once
-#include<assert.h>
+#include<cassert>
 #include<assimp/Importer.hpp>
 #include<assimp/postprocess.h>
 #include<assimp/scene.h>
@@ -46,11 +46,11 @@ public:
 	
 
 	//getter and setter 
-	std::vector<Bone*> getBones() const; 
-	const aiScene* getScene() const; 
-	maths::mat4 getGlobalInverseTransform() const; 
-	const MeshResource& getMeshResource() const; 
-	const std::vector<glm::vec<4, BoneData>> getBoneData() const; 
+	auto getBones() const -> std::vector<Bone*>; 
+	auto getScene() const -> const aiScene*; 
+	auto getGlobalInverseTransform() const -> maths::mat4; 
+	auto getMeshResource() const -> const MeshResource&; 
+	auto getBoneData() const -> const std::vector<glm::vec<4, BoneData>>; 
 	
 };
 

@@ -20,12 +20,12 @@ class MeshRenderer : public Renderer
 //	Material* m_Material; 
 public:
 	
-	MeshRenderer(Mesh* mesh);//,Material* material = nullptr);
-	MeshRenderer(Mesh* mesh, Shader* shader);// ,Material* material = nullptr);
+	MeshRenderer(Mesh* mesh, bool isBatchRendering);//,Material* material = nullptr);
+	MeshRenderer(Mesh* mesh, Shader* shader, bool isBatchRendering);// ,Material* material = nullptr);
 	void render(const RenderingEngine& renderingEngine) override; 
 	void setBatchRendering(bool isBatchRendering); 
 	void SetMesh(Mesh* mesh); 
-	const Mesh& getMesh() const; 
+	auto getMesh() const -> const Mesh&; 
 	~MeshRenderer();
 protected: 
 	void renderMesh(const MeshResource& meshResource);

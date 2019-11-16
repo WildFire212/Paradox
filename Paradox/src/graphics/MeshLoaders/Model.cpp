@@ -6,6 +6,9 @@ namespace Paradox {
 
 		Model::Model()
 		{
+			m_Extents.m_MaxExtents = maths::vec3(-1000, -1000, -1000);
+			m_Extents.m_MinExtents = maths::vec3(1000, 1000, 1000);
+
 		}
 		Model::Model(std::string fileLocation)
 		{
@@ -39,7 +42,7 @@ namespace Paradox {
 				{
 					
 
-						Texture* texture = new Texture("Textures/plain.png");
+						Texture* texture = new Texture("Textures/plain.jpg");
 						m_MaterialList[i] = new Material(*texture, 0.3f, 0.3f, *texture);
 					
 				}
@@ -69,13 +72,49 @@ namespace Paradox {
 			std::vector<GLfloat> normals;
 
 			for (size_t i = 0; i < mesh->mNumVertices; i++) {
+				//vertices
 				vertices.insert(vertices.end(), { mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z });
+
+					//calculating extents 
+					auto calcExtents = [=](float x, float y, float z) {
+						if (x > m_Extents.m_MaxExtents.x)
+						{
+							m_Extents.m_MaxExtents.x = x;
+						}
+						if (y > m_Extents.m_MaxExtents.y)
+						{
+							m_Extents.m_MaxExtents.y = y;
+						}
+						if (z > m_Extents.m_MaxExtents.z)
+						{
+							m_Extents.m_MaxExtents.z = z;
+						}
+					
+						if (x < m_Extents.m_MinExtents.x)
+						{
+							m_Extents.m_MinExtents.x = x;
+						}
+						if (y < m_Extents.m_MinExtents.y)
+						{
+							m_Extents.m_MinExtents.y = y;
+						}
+						if (z < m_Extents.m_MinExtents.z)
+						{
+							m_Extents.m_MinExtents.z = z;
+						}
+
+					};
+					calcExtents(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
+				//texCoords
 				if (mesh->mTextureCoords[0]) {
 					texCoords.insert(texCoords.end(), { mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y });
+
+					
 				}
 				else {
 					texCoords.insert(texCoords.end(), { 0.0f,0.0f });
 				}
+				//normals 
 				normals.insert(normals.end(), { -mesh->mNormals[i].x,-mesh->mNormals[i].y ,-mesh->mNormals[i].z });
 			}
 
@@ -124,7 +163,7 @@ namespace Paradox {
 				}
 				if(!m_MaterialList[i] ){
 				
-					Texture* texture = new Texture("Textures/plain.png");
+					Texture* texture = new Texture("Textures/plain.jpg");
 					m_MaterialList[i] = new Material(*texture, 0.3f, 0.3f, *texture);
 				}
 

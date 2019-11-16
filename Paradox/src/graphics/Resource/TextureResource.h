@@ -18,10 +18,10 @@ public:
 	void setBitDepth(int bitdepth);
 
 
-	GLuint getTextureID() const;
-	int getHeight();
-	int getWidth();
-	int getBitDepth();
+	auto getTextureID() const -> GLuint;
+	auto getHeight() -> int;
+	auto getWidth() -> int;
+	auto getBitDepth() -> int;
 	
 };
 

@@ -28,13 +28,13 @@ namespace Paradox {
 			Shader(const char* vertLoc, const char* fragLoc);
 			~Shader();
 			
-			ShaderResource loadShaders(const char* vertShader, const char* fragShader);
+			auto loadShaders(const char* vertShader, const char* fragShader) -> ShaderResource;
 			
 			void bind() const; 
 			void unbind() const; 
 
 			//getters 
-			const ShaderResource& getShaderResource() const;
+			auto getShaderResource() const -> const ShaderResource&;
 			//setters 
 			void SetUniform1i(const char* name, int value); 
 			void SetUniform1f(const char* name,float value); 
@@ -48,10 +48,10 @@ namespace Paradox {
 			virtual void updateAllUniforms(Transform* transform, const RenderingEngine* engine, const Material* material);
 		protected: 
 			void addShader(const GLuint& ShaderProgram, const char* shaderSrc, GLenum shaderType);
-			GLuint getUniformLocation(const char* name);
+			auto getUniformLocation(const char* name) -> GLuint;
 			void addUniforms(const char* ShaderCode, ShaderResource* shaderResource);
 			void checkStructs(std::string shaderCode); 
-			std::map<std::pair<std::string, std::string>, std::string>::iterator findInStruct(std::string name);
+			auto findInStruct(std::string name) -> std::map<std::pair<std::string, std::string>, std::string>::iterator;
 		};
 
 } }

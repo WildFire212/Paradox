@@ -148,15 +148,20 @@ namespace Paradox {
 				return this; 
 			}
 			else {
- 
-				for (GameObject* child: m_Children)
+
+				for (GameObject* child : m_Children)
 				{
-						return child->getObject(name); 
+					GameObject* search = child->getObject(name);
+					if (search != nullptr)
+					{
+						return search;
+					}
 				}
+			}
 
 			
-			}
-			return nullptr; 
+				return nullptr; 
+			
 		}
 
 		Transform* GameObject::getTransform() const
@@ -164,6 +169,16 @@ namespace Paradox {
 			return this->m_Transform;
 		}
 
+
+		void GameObject::move(vec3 Move)
+		{
+			m_Move = Move;
+			if (!getComponent<PhysicsObject>())
+			{
+				m_Transform->move(Move); 
+				m_Move = vec3(0, 0, 0); 
+			}
+		}
 
 		GameObject::~GameObject()
 		{

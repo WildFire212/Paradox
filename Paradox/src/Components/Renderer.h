@@ -32,7 +32,7 @@ namespace Paradox {
 				m_IBO = new ElementBuffer();
 
 			}
-			const Shader& getShader() const {
+			auto getShader() const -> const Shader& {
 				return *m_Shader;
 			}
 			void setShader(Shader* shader) {

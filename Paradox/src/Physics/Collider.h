@@ -31,29 +31,29 @@ public:
 	explicit Collider(ColliderType colliderType):
 	m_ColliderType(colliderType) 
 	{
-		m_PhysicsMaterial = new PhysicsMaterial(0.4f, 0.4f, 0.0f);
+		m_PhysicsMaterial = new PhysicsMaterial(0.4F, 0.4F, 0.0F);
 	}
 
-	~Collider() {}
+	~Collider() = default;
 
-	 IntersectData Intersect(const Collider& other);
+	 auto Intersect(const Collider& other) -> IntersectData;
 	
 
 	virtual void transform(const vec3& translation) {}
 
-	inline const ColliderType& getType() const {
+	inline auto getType() const -> const ColliderType& {
 		return m_ColliderType; 
 	}
 	//virtual functions should be inlined when not a reference or pointer used 
 	//fully contained object inside a composite
 	//when the compiler knows the "exact class" of the object which is the target of the virtual function call.
-	virtual const vec3 getCenter() const { return vec3(0.0f, 0.0f, 0.0f); }
+	virtual auto getCenter() const -> const vec3 { return vec3(0.0F, 0.0F, 0.0F); }
 
 	//setters
 	void setPhysicsMaterial(const PhysicsMaterial* physicsMaterial) ; 
 
 	//getters 
-	inline const PhysicsMaterial& getPhysicsMaterial() const {
+	inline auto getPhysicsMaterial() const -> const PhysicsMaterial& {
 		return *m_PhysicsMaterial; 
 	}
 };

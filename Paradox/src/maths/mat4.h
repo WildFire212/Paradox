@@ -2,7 +2,7 @@
 
 #include"vec4.h"
 #include"vec3.h"
-#include<math.h>
+#include<cmath>
 #include<assimp/matrix4x4.h>
 #include<glm.hpp>
 
@@ -22,31 +22,32 @@ namespace Paradox {
 			mat4(float* elements);
 			mat4(const vec4& row0, const vec4& row1, const vec4& row2, const vec4& row3);
 
-			vec4 getColumn(int colIndex);
-			static mat4 Identity(); 
+			auto getColumn(int colIndex) -> vec4;
+			static auto Identity() -> mat4; 
 
-			mat4& Multiply(const mat4& other);
-			mat4& Add(const mat4& other); 
-			mat4& Subtract(const mat4& other); 
+			auto Multiply(const mat4& other) -> mat4&;
+			auto Add(const mat4& other) -> mat4&; 
+			auto Subtract(const mat4& other) -> mat4&; 
 			//overloaded operators 
 
-			friend mat4 operator*(mat4 left, const mat4& right);
-			friend mat4 operator+(mat4 left, const mat4& right);
-			friend mat4 operator-(mat4 left, const mat4& right);
+			friend auto operator*(mat4 left, const mat4& right) -> mat4;
+			friend auto operator+(mat4 left, const mat4& right) -> mat4;
+			friend auto operator-(mat4 left, const mat4& right) -> mat4;
 			
-			bool operator!=(const mat4& other)	const; 
-			bool operator==(const mat4& other) const; 
+			auto operator!=(const mat4& other)	const -> bool; 
+			auto operator==(const mat4& other) const -> bool; 
 			//bool operator!=(nullptr_t) const; 
-			static mat4 Orthographic(float left, float right, float bottom, float top, float near, float far);
-			static mat4 Perpective(float fov, float aspectRatio, float near, float far);
+			static auto Orthographic(float left, float right, float bottom, float top, float near, float far) -> mat4;
+			static auto Perpective(float fov, float aspectRatio, float near, float far) -> mat4;
 
-			static mat4 Translate(const vec3& translation);
-			static mat4 Rotate(vec3 forward, vec3 up, vec3 right);
-			static mat4 Rotate(quaternion quat);
-			static mat4 Rotate(vec3 forward, vec3 up); 
-			static mat4 Rotate(float angle, const vec3& axis);
-			static mat4 Scale(const vec3& scale);
-			static mat4 Scale(float x, float y, float z); 
-			static mat4 aIMatrix4x4ToMat4(aiMatrix4x4 matrix);
+			static auto Translate(const vec3& translation) -> mat4;
+			static auto Rotate(vec3 forward, vec3 up, vec3 right) -> mat4;
+			static auto Rotate(quaternion quat) -> mat4;
+			static auto Rotate(vec3 forward, vec3 up) -> mat4; 
+			static auto Rotate(float angle, const vec3& axis) -> mat4;
+			//static auto Rotate(const quaternion& quat) ->mat4; 
+			static auto Scale(const vec3& scale) -> mat4;
+			static auto Scale(float x, float y, float z) -> mat4; 
+			static auto aIMatrix4x4ToMat4(aiMatrix4x4 matrix) -> mat4;
 		};
 } }

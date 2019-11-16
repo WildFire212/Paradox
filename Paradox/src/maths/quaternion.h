@@ -3,7 +3,7 @@
 #include"vec3.h"
 #include<glm.hpp>
 #include"mat4.h"
-#include<math.h>
+#include<cmath>
 namespace Paradox {
 	namespace maths {
 
@@ -13,27 +13,31 @@ struct quaternion
 	quaternion(); 
 	quaternion(float x, float y ,float z, float w);
 	quaternion(maths::vec3  axis, float angle);
-	float length(); 
+	auto length() -> float; 
 
 	void  normalize();
 	void conjugate(); 
-	quaternion& Multiply(float r); 
-	quaternion& Multiply(const quaternion& other); 
-	quaternion& Multiply(maths::vec3 r); 
-	quaternion& Subtract(const quaternion& other); 
-	quaternion& Add(const quaternion& other); 
-	mat4 toRotationMatrix();
-	float dot(quaternion r); 
-	quaternion Nlerp(quaternion& dest, float lerpFactor, bool shortest);
-	quaternion Slerp(quaternion& dest, float lerpFactor, bool shortest);
+	auto Multiply(float r) -> quaternion&; 
+	auto Multiply(const quaternion& other) -> quaternion&; 
+	auto Multiply(maths::vec3 r) -> quaternion&; 
+	auto Subtract(const quaternion& other) -> quaternion&; 
+	auto Add(const quaternion& other) -> quaternion&; 
+	auto toRotationMatrix() -> mat4;
+	auto dot(quaternion r) -> float; 
+	auto Nlerp(quaternion& dest, float lerpFactor, bool shortest) -> quaternion;
+	auto Slerp(quaternion& dest, float lerpFactor, bool shortest) -> quaternion;
 	~quaternion();
 
+	friend auto operator*(quaternion left, const quaternion& right)->quaternion; 
+	friend auto operator+(quaternion left, const quaternion& right)->quaternion; 
+	friend auto operator-(quaternion left, const quaternion& right)->quaternion; 
+	friend auto operator/(quaternion left, const quaternion& right)->quaternion; 
+	
+	auto operator==(const quaternion& other) -> bool; 
+	auto operator!=(const quaternion& other) -> bool; 
 
-	bool operator==(const quaternion& other); 
-	bool operator!=(const quaternion& other); 
 
-
-	static quaternion nlerp(quaternion a, quaternion b, float blend)
+	static auto nlerp(quaternion a, quaternion b, float blend) -> quaternion
 	{
 		//cout << a.w + a.x + a.y + a.z << endl;
 		a.normalize();
@@ -41,9 +45,9 @@ struct quaternion
 
 		quaternion result;
 		float dot_product = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
-		float one_minus_blend = 1.0f - blend;
+		float one_minus_blend = 1.0F - blend;
 
-		if (dot_product < 0.0f)
+		if (dot_product < 0.0F)
 		{
 			result.x = a.x * one_minus_blend + blend * -b.x;
 			result.y = a.y * one_minus_blend + blend * -b.y;

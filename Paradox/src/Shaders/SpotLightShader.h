@@ -26,7 +26,7 @@ namespace Paradox {
 		public:
 			SpotLightShader(const char* vertLoc, const char* fragLoc);
 			void updateAllUniforms( Transform* transform, const RenderingEngine* engine, const Material* material) override;
-			const SpotLightLocation& getSpotLightLocation(); 
+			auto getSpotLightLocation() -> const SpotLightLocation&; 
 			~SpotLightShader();
 		private:
 			void calcLightLocations();

@@ -2,7 +2,9 @@
 #include"Renderable.h"
 #include"Resource/MeshResource.h"
 #include"MeshLoaders/Model.h"
+#include"../maths/maths.h"
 #include<memory>
+
 namespace Paradox {
 	namespace graphics {
 
@@ -13,26 +15,37 @@ namespace Paradox {
 			std::shared_ptr<Model> m_Model;
 			std::string m_FileLocation; 
 			bool m_isModel; 
-
+			struct ColliderData {
+				maths::vec3 m_MinExtents; 
+				maths::vec3 m_MaxExtents; 
+				maths::vec3 m_Center;  
+				float m_Radius; 
+			}m_ColliderData;
 		public: 
-		
+			//constr and destr
 			Mesh(const char* fileLocation); 
 			Mesh(std::vector<GLfloat> vertices, std::vector<GLushort> indices,GLuint vertexCount, GLuint indexCount, std::vector<GLfloat> texCoords,Material* material,bool calculateNormals = true);
 			Mesh(std::vector<GLfloat> vertices, std::vector<GLushort> indices,GLuint vertexCount, GLuint indexCount, std::vector<GLfloat> texCoords, Material* material,std::vector<GLfloat> normals,bool calculateNormals);
-			
-			~Mesh(); 
-			const MeshResource& getMeshResource() const; 
-			const Model& getModel() const; 
-			const bool isModel() const; 
+			~Mesh();
+		
+			//others 
+			auto updateCollider(maths::mat4 transformationMatrix);
 
-			const Material& getMaterial() const; 
+			//bools 
+			auto isModel() const -> const bool; 
+			//getters 
+			auto getMeshResource() const -> const MeshResource&; 
+			auto getModel() const -> const Model&; 
+			auto getMaterial() const -> const Material&; 
+			auto getColliderData() const -> const ColliderData&; 
+
 			
 		private: 
-			std::vector<GLfloat> calculateAverageNormals(std::vector<GLushort> indices, unsigned int numOfIndices, std::vector<GLfloat> vertices,
-				 unsigned int numOfVertices,std::vector<GLfloat> normals);
-//MeshResource load(std::string fileLocation);
-			
-			Model load(std::string fileLocation); 
+			auto calculateAverageNormals(std::vector<GLushort> indices, unsigned int numOfIndices, std::vector<GLfloat> vertices,
+				 unsigned int numOfVertices,std::vector<GLfloat> normals) -> std::vector<GLfloat>;
+				//MeshResource load(std::string fileLocation);
+			auto load(std::string fileLocation) -> Model; 
+			auto calculateColliderData(std::vector <GLfloat> vertices)->void;
 			
 	};
 	

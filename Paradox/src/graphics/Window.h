@@ -1,6 +1,6 @@
 #pragma once
-#include"GLFW/glfw3.h"
 #include"GL/glew.h"
+#include"GLFW/glfw3.h"
 #include<iostream>
 #include<alc.h>
 #include<al.h>
@@ -28,12 +28,14 @@ namespace Paradox {
 		void Init()  ; 
 		void clear() const; 
 		void update();
-		bool getWindowShouldClose();
+		auto getWindowShouldClose() -> bool;
+		auto CloseWindow()const -> void ;
+		
 		Window(const char* Title, int width, int height);
-		static bool getKeys(int keycode); 
-		static bool getMouseKeys(int keycode); 
-		static GLfloat getChangeX(); 
-		static GLfloat getChangeY();
+		static auto getKeys(int keycode) -> bool; 
+		static auto getMouseKeys(int keycode) -> bool; 
+		static auto getChangeX() -> GLfloat; 
+		static auto getChangeY() -> GLfloat;
 		~Window();
 	private: 
 		void CreateCallbacks(); 
@@ -43,6 +45,6 @@ namespace Paradox {
 		static void mouse_button_callback(GLFWwindow* glwindow, int button, int action, int mods);
 		
 		//helper function for static array initialization
-		bool* getArray(int size); 
+		auto getArray(int size) -> bool*; 
 		};
 }}

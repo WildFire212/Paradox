@@ -6,7 +6,7 @@ namespace Paradox {
 	namespace component {
 			
 
-		Terrain::Terrain(int gridX, int gridZ, Texture* tex, const char* HeightMapLocation) :MeshRenderer(generateTerrain(HeightMapLocation,tex, gridX, gridZ))
+		Terrain::Terrain(int gridX, int gridZ, Texture* tex, const char* HeightMapLocation) :MeshRenderer(generateTerrain(HeightMapLocation,tex, gridX, gridZ),true)
 		{
 		
 

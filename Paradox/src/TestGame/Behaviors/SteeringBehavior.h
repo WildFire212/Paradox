@@ -23,10 +23,10 @@ public:
 	void update(float deltaTime) override;
 	void addToList(vec3 wayPoint); 
 private: 
-	vec3 seek(vec3 TargetPos); 
+	auto seek(vec3 TargetPos) -> vec3; 
 	//void arrive(); 
-	vec3 followPath(); 
-	vec3 Pursuit(vec3 TargetPosition, float speed); 
+	auto followPath() -> vec3; 
+	auto Pursuit(vec3 TargetPosition, float speed) -> vec3; 
 	
 
 

@@ -52,16 +52,16 @@ void NormalState::run(PlayerBehavior* playerBehavior, float deltaTime)
 	//up 
 	if (first) {
 
-	playerBehavior->getTransform()->translation +=
-		maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x, 2.0f, playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) *1.5f*playerBehavior->m_MaxSpeed* deltaTime;
+	playerBehavior->getTransform()->move(
+		maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x, 2.0f, playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) *1.5f*playerBehavior->m_MaxSpeed* deltaTime);
 	first = false; 
 
 	}
 	//down
 	else 
 	{
-		playerBehavior->getTransform()->translation +=
-			maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x, -2.0f, playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) *1.5f*playerBehavior->m_MaxSpeed * deltaTime;
+		playerBehavior->getTransform()->move(
+			maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x, -2.0f, playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) *1.5f*playerBehavior->m_MaxSpeed * deltaTime);
 		first = true; 
 	}
 
@@ -70,6 +70,6 @@ void NormalState::run(PlayerBehavior* playerBehavior, float deltaTime)
 void NormalState::walk(PlayerBehavior * playerBehavior, float deltaTime)
 {
 	
-	playerBehavior->getTransform()->translation +=
-	maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x , 0.0f,playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) * playerBehavior->m_MaxSpeed * deltaTime;
+	playerBehavior->getTransform()->move(
+	maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x , 0.0f,playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) * playerBehavior->m_MaxSpeed * deltaTime);
 }

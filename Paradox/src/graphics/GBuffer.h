@@ -23,11 +23,11 @@ public:
 	void unbind(); 
 	void bindTextures();
 	static void renderQuad();
-	GLuint getGBuffer(); 
+	auto getGBuffer() -> GLuint; 
 
 	~GBuffer();
 private:
-	float lerp(float a, float b, float f);
+	auto lerp(float a, float b, float f) -> float;
 };
 } }
 

@@ -34,15 +34,15 @@ public:
 	void setMaterial(Material* material);
 	
 	//getters
-	std::vector<GLfloat> getVertices() const;
-	std::vector<GLushort> getIndices() const;
-	std::vector<GLfloat> getTexCoords() const;
-	std::vector<GLfloat> getNormals() const;
-	GLuint getTexCoordCount() const;
-	const Material& getMaterial() const; 
+	auto getVertices() const -> std::vector<GLfloat>;
+	auto getIndices() const -> std::vector<GLushort>;
+	auto getTexCoords() const -> std::vector<GLfloat>;
+	auto getNormals() const -> std::vector<GLfloat>;
+	auto getTexCoordCount() const -> GLuint;
+	auto getMaterial() const -> const Material&; 
 
-	GLuint getVertexCount() const; 
-	GLuint getIndexCount() const; 
+	auto getVertexCount() const -> GLuint; 
+	auto getIndexCount() const -> GLuint; 
 
 };
 } }

@@ -32,7 +32,7 @@ IntersectData SphereCollider::intersectSphereCollider(const SphereCollider & oth
 	//actual distance b/w the spheres 
 	float distance = centerDistance - radiusDistance; 
 
-	return IntersectData(distance < 0, direction * distance); 
+	return IntersectData(distance < 0, direction ,distance); 
 }
 void SphereCollider::setRadius(float radius)
 {

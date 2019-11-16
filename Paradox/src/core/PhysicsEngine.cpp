@@ -13,7 +13,7 @@ namespace Paradox {
 		{
 			for (size_t i = 0; i < m_PhysicsObjects.size(); i++)
 			{
-			//	m_PhysicsObjects[i]->integrate(deltaTime); 
+				m_PhysicsObjects[i]->integrate(deltaTime); 
 			}
 		}
 
@@ -29,7 +29,7 @@ namespace Paradox {
 					if (intersectData.getdoesIntersect())
 					{
 
-						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_PLANE)
+						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_PLANE && m_PhysicsObjects[j]->getCollider().getType() == Collider::TYPE_SPHERE)
 						{
 							
 							vec3 normal = (static_cast<PlaneCollider*>(&m_PhysicsObjects[i]->getCollider()))->getNormal() ;
@@ -62,12 +62,15 @@ namespace Paradox {
 								m_PhysicsObjects[i]->setVelocity(m_PhysicsObjects[i]->getVelocity() - reflected);
 						}
 
-						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_TERRAIN)
+						//terrain and sphere detection collision
+						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_TERRAIN
+							&&
+							m_PhysicsObjects[j]->getCollider().getType() == Collider::TYPE_SPHERE)
 						{
 							vec3 position = m_PhysicsObjects[j]->getPosition();
 							float radius = (static_cast<SphereCollider*>(&m_PhysicsObjects[j]->getCollider())->getRadius());
 							vec3 height = (static_cast<TerrainCollider*>(&m_PhysicsObjects[i]->getCollider()))->getTerrain().getHeightOfTerrain(position.x , position.z);
-							m_PhysicsObjects[j]->getTransform()->translation.y = height.y + radius; 
+							m_PhysicsObjects[j]->getTransform()->move(vec3(0, height.y + radius,0)); 
 
 							//vec3 position = m_PhysicsObjects[j]->getPosition(); 
 							//vec3 normal = (static_cast<TerrainCollider*>(&m_PhysicsObjects[i]->getCollider()))->getTerrain().getNormal(position.x, position.z);
@@ -93,6 +96,14 @@ namespace Paradox {
 							//}
 						}
 						
+						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_AABB && 
+							m_PhysicsObjects[j]->getCollider().getType() == Collider::TYPE_SPHERE) {
+							//std::cout << "AABB and the ball collided" << std::endl; 
+							m_PhysicsObjects[j]->getTransform()->move(intersectData.getDistance() * intersectData.getDirection()); 
+
+						}
+
+						//do it for opposite and also for sphere Collider
 					}
 				}
 			}

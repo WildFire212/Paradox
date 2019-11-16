@@ -13,9 +13,9 @@ namespace Paradox {
 			explicit TerrainCollider(const Terrain& terrain);
 			
 			//Intersect Data
-			IntersectData intersectSphereCollider(const SphereCollider& sphereCollider);
+			auto intersectSphereCollider(const SphereCollider& sphereCollider) -> IntersectData;
 
-			inline const Terrain& getTerrain() const {
+			inline auto getTerrain() const -> const Terrain& {
 				return m_Terrain; 
 			}
 			

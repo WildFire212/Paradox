@@ -12,7 +12,7 @@ namespace Paradox {
 		
 
 		
-		std::string readFile(const char* fileloc) {
+		auto readFile(const char* fileloc) -> std::string {
 			std::string file;
 			std::fstream FILE(fileloc, std::ios::in);
 
@@ -41,7 +41,7 @@ namespace Paradox {
 		}
 
 	private:
-		static std::string ltrim(const std::string& s)
+		static auto ltrim(const std::string& s) -> std::string
 		{
 			const std::string WHITESPACE = " \n\r\t\f\v";
 			size_t  start = s.find_first_not_of(WHITESPACE);
@@ -49,13 +49,13 @@ namespace Paradox {
 			{
 				return "";
 			}
-			else if (start != std::string::npos)
+			if (start != std::string::npos)
 			{
 				return s.substr(start);
 			}
 
 		}
-		static std::string rtrim(const std::string& s)
+		static auto rtrim(const std::string& s) -> std::string
 		{
 			const std::string WHITESPACE = " \n\r\t\f\v";
 			size_t  end = s.find_last_not_of(WHITESPACE);
@@ -63,20 +63,20 @@ namespace Paradox {
 			{
 				return "";
 			}
-			else if (end != std::string::npos)
+			if (end != std::string::npos)
 			{
 				return s.substr(0, end + 1);
 			}
 
 		}
 	public:
-		static std::string trim(const std::string& s)
+		static auto trim(const std::string& s) -> std::string
 		{
 			return rtrim(ltrim(s));
 		}
 
 		template <class T>
-		static T* convertToArray(std::vector<T> vecArray)
+		static auto convertToArray(std::vector<T> vecArray) -> T*
 		{
 			T* arr = new T[vecArray.size()];
 			for (size_t i = 0; i < vecArray.size(); i++)
@@ -86,7 +86,7 @@ namespace Paradox {
 			return arr;
 		}
 		template <class T> 
-		static std::vector<T> convertToVectorArray(T* array) {
+		static auto convertToVectorArray(T* array) -> std::vector<T> {
 			std::vector<T> vecArray; 
 		}
 

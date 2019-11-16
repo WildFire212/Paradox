@@ -21,12 +21,12 @@ public:
 	//normalize
 	void normalize(); 
 
-	IntersectData intersectSphereCollider(const SphereCollider& sphereCollider);
+	auto intersectSphereCollider(const SphereCollider& sphereCollider) -> IntersectData;
 	//getters 
-	inline const vec3 getNormal() const {
+	inline auto getNormal() const -> const vec3 {
 		return m_Normal; 
 	}
-	inline const float getDistance() const {
+	inline auto getDistance() const -> const float {
 		return m_Distance; 
 	}
 

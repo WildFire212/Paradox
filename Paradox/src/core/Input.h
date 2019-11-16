@@ -11,13 +11,13 @@ namespace Paradox {
 		std::vector<int> currKeys;
 	public:
 		void update(); 
-		bool getKeyDown(int keycode);
-		static bool getKey(int keycode); 
-		bool getKeyUp(int keycode);
+		auto getKeyDown(int keycode) -> bool;
+		static auto getKey(int keycode) -> bool; 
+		auto getKeyUp(int keycode) -> bool;
 	private: 
-		 bool downKeysContain(int i); 
-		bool currKeysContain(int i); 
-		bool upKeysContain(int i); 
+		 auto downKeysContain(int i) -> bool; 
+		auto currKeysContain(int i) -> bool; 
+		auto upKeysContain(int i) -> bool; 
 		
 
 	};

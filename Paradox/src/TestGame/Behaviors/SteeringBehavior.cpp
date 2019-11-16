@@ -18,8 +18,10 @@ SteeringBehavior::~SteeringBehavior()
 
 void SteeringBehavior::update(float deltaTime)
 {
-	m_Velocity = Pursuit(m_Scene.findObject("Player")->getTransform()->translation, 4.0f);
-	getTransform()->translation +=  m_Velocity* deltaTime;
+	//m_Velocity = Pursuit(m_Scene.findObject("Ball")->getTransform()->getTranslation(),4.0f);
+	m_Velocity = followPath();
+	getTransform()->move (vec3(m_Velocity.x* deltaTime,0.0f , m_Velocity.z * deltaTime));
+	//getTransform()->move (vec3(m_Velocity.x* deltaTime,0.0f , m_Velocity.y * deltaTime));
 }
 
 void SteeringBehavior::addToList(vec3 wayPoint)
@@ -38,7 +40,7 @@ void SteeringBehavior::addToList(vec3 wayPoint)
 
 vec3 SteeringBehavior::seek(vec3 TargetPos)
 {
-	vec3 desiredVelocity = TargetPos - getTransform()->translation; 
+	vec3 desiredVelocity = TargetPos - getTransform()->getTranslation();
 	desiredVelocity.normalize(); 
 	
 	return m_Velocity = desiredVelocity * m_MaxSpeed ;
@@ -49,7 +51,7 @@ vec3 SteeringBehavior::seek(vec3 TargetPos)
 vec3 SteeringBehavior::followPath()
 {
 	
-	vec3 toCurrWayPoint = *m_CurrWayPointIterator - getTransform()->translation ;
+	vec3 toCurrWayPoint = *m_CurrWayPointIterator - getTransform()->getTranslation() ;
 	bool pathFinished = false; 
 	float l = toCurrWayPoint.length();
 	if ( 0.0f < l && l < 1.0f)
@@ -77,7 +79,7 @@ vec3 SteeringBehavior::followPath()
 vec3 SteeringBehavior::Pursuit(vec3 TargetPosition, float speed)
 {
 	//consider evader	
-	vec3 toEvader = TargetPosition - getTransform()->translation;
+	vec3 toEvader = TargetPosition - getTransform()->getTranslation();
 	//dot product of front of evader and zombie 
 	// > 0 then chase without changing the direction
 

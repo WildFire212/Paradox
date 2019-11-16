@@ -73,10 +73,6 @@ namespace Paradox {
 				{
 					render = true; 
 					unprocessedTime -= m_FrameTime; 
-					if (m_Window->getWindowShouldClose())
-					{
-						stop(); 
-					}
 					m_Game.update( m_FrameTime);
 					PhysicsEngine::Instance().update(m_FrameTime); 
 					if (frameCounter >= Time::SECONDS)
@@ -94,6 +90,10 @@ namespace Paradox {
 			else {
 				
 			}
+					if (m_Window->getWindowShouldClose())
+					{
+						stop(); 
+					}
 		}
 		cleanUp();
 	}
@@ -109,6 +109,8 @@ namespace Paradox {
 		{
 			return; 
 		}
+		m_Window->CloseWindow(); 
+		abort(); 
 		isRunning = false; 
 	}
 

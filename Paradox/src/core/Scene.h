@@ -17,9 +17,9 @@ namespace Paradox {
 			virtual void render(RenderingEngine& renderingEngine); 
 			void setEngine(CoreEngine& engine); 
 			void addObject(GameObject* gameObject) ; 
-			GameObject* findObject(std::string name) ; 
+			auto findObject(std::string name) -> GameObject* ; 
 		private: 
-			GameObject* getRoot(); 
+			auto getRoot() -> GameObject*; 
 			 
 		};
 }

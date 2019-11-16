@@ -1,9 +1,10 @@
 #include "Transform.h"
+#include"../../src/core/GameObject.h"
 using namespace Paradox::maths; 
 namespace Paradox {
 	Transform::Transform() :
-		translation(0, 0, 0),
-		rotation(0,0,0,1),
+		translation(0.0f, 0.0f, 0.0f),
+		rotation(0,0,0,1.0f),
 		scale(1,1,1),
 		m_ParentMatrix(mat4::Identity())	
 	{
@@ -55,9 +56,9 @@ namespace Paradox {
 	const maths::mat4 Transform::getTransformation()  
 {
 	maths::mat4 translationMatrix = maths::mat4::Translate(this->translation);
-	maths::mat4 rotationMatrix = rotation.toRotationMatrix();
-	maths::mat4 scaleMatrix= maths::mat4::Scale(this->scale);
-	return getParentMatrix()*translationMatrix * rotationMatrix * scaleMatrix;
+	maths::mat4 rotationMatrix = maths::mat4::Rotate(this->rotation); 
+		maths::mat4 scaleMatrix= maths::mat4::Scale(this->scale);
+	return getParentMatrix()* translationMatrix* rotationMatrix * scaleMatrix;
 	//return translationMatrix * scaleMatrix;
 }
 
@@ -69,6 +70,11 @@ namespace Paradox {
 		}
 		 return m_ParentMatrix; 
 	 }
+
+	auto Transform::getTranslation() -> const maths::vec3
+	{
+		return translation; 
+	}
 
  void Transform::setTranslation(maths::vec3 translation)
 {
@@ -119,6 +125,13 @@ namespace Paradox {
 	 rotation = (quaternion(axis, angle).Multiply(rotation));
 	 rotation.normalize(); 
  }
+
+ void Transform::move(maths::vec3 move)
+ {
+	 translation += move; 
+ }
+
+
 
  const maths::mat4 Transform::initTranslationMatrix() const
  {

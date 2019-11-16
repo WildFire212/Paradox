@@ -91,6 +91,10 @@ GLfloat Window::yChangeTemp;
 		{
 			return glfwWindowShouldClose(window);
 		}
+		auto Window::CloseWindow() const -> void
+		{
+			glfwDestroyWindow(window); 
+		}
 		void Window::framebuffer_size_callback(GLFWwindow * window, int width, int height)
 		{
 			glViewport(0, 0, width, height);

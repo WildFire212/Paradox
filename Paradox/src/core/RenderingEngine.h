@@ -23,9 +23,9 @@ public:
 	~RenderingEngine();
 	void render( GameObject* gameObject); 
 	void addLight(Light* light); 
-	const Camera& getMainCamera() const; 
+	auto getMainCamera() const -> const Camera&; 
 	void setMainCamera(Camera* camera); 
-	const Light* getActiveLight() const;
+	auto getActiveLight() const -> const Light*;
 };
 } }
 

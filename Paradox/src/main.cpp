@@ -71,10 +71,6 @@ int main() {
 }
 #endif
 
-#include"Physics/SphereCollider.h"
-#include"Physics/AABBCollider.h"	
-#include"Physics/PlaneCollider.h"
-#include"Components/PhysicsObject.h"
 using namespace Paradox::core; 
 using namespace Paradox::component; 
 
@@ -84,9 +80,9 @@ int main() {
 //	audio.playSound();	
 
 	TestGame game;	
-	Paradox::core::CoreEngine core(game, "game ", 800, 800,60);	
+	Paradox::core::CoreEngine core(game, "game ", 800, 800,120.f);	
 	
-		//temp code	
+		//temp code	audio
 #if 0
 	audio::Audio audio("Sound/stereo.wav");	
 	 audio::Audio audio2("Sound/wave2.wav");
@@ -121,31 +117,7 @@ int main() {
 		 std::this_thread::sleep_for(timespan);
 	 }
 #endif
-	//temp code ends 
-#if 0 
-	 SphereCollider sphere1(maths::vec3(2, 0, 0), 1.0f);
-	 SphereCollider sphere2(maths::vec3(4, 0, 0), 2.0f);
-	 SphereCollider sphere3(maths::vec3(4, 0, 0), 1.0f);	
 
-
-	 std::cout<<sphere1.intersectSphereCollider(sphere2).getDistance()<<std::endl;
-	 std::cout<<sphere1.intersectSphereCollider(sphere3).getDistance()<<std::endl;
-
-	 AABBCollider aabb1(vec3(2, 1, 0), vec3(3, 3, 1));
-	 AABBCollider aabb2(vec3(1, 1, 0), vec3(3, 3, 1));
-	 AABBCollider aabb3(vec3(4, 4, 0), vec3(6, 5, -1));
-
-
-	 std::cout << aabb1.intersectAABB(aabb2).getdoesIntersect() << std::endl; 
-	 std::cout << aabb1.intersectAABB(aabb3).getdoesIntersect() << std::endl; 
-	
-	 PlaneCollider plane1(vec3(0, 1, 0), 0.0f);
-	 SphereCollider sphere1(maths::vec3(-1, 2, 0), 1.0f);
-	 SphereCollider sphere2(maths::vec3(-1, 2, 0), 3.0f);
-
-	 std::cout << plane1.intersectSphereCollider(sphere1).getdoesIntersect() << std::endl;
-	 std::cout << plane1.intersectSphereCollider(sphere2).getdoesIntersect() << std::endl;
-#endif
 	 core.start(); 
 	// component::PhysicsObject phy(vec3(0, 0, 0), vec3(0.1f,0,0));
 	 //phy.integrate(20.0f); 

@@ -20,9 +20,9 @@ public:
 	virtual void renderLight(RenderingEngine& renderingEngine) {};
 	//void render(RenderingEngine& engine) override {}
 	void addToEngine(CoreEngine& engine) override;
-	Shader& getShader() const;
+	auto getShader() const -> Shader&;
 	void setShader(Shader* shader); 
-	ValueMap* getValueMap() const; 
+	auto getValueMap() const -> ValueMap*; 
 	~Light();
 protected :
 	glm::vec3 color;

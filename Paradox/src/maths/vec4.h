@@ -9,18 +9,18 @@ namespace Paradox {
 			vec4(float x, float y, float z, float w);
 			
 			
-			constexpr vec4& Add(const vec4& other);	//return by reference because 
-			constexpr vec4& Subtract(const vec4& other);
-			vec4& Multiply(const vec4& other);
-			vec4& Divide(const vec4& other);
+			constexpr auto Add(const vec4& other) -> vec4&;	//return by reference because 
+			constexpr auto Subtract(const vec4& other) -> vec4&;
+			auto Multiply(const vec4& other) -> vec4&;
+			auto Divide(const vec4& other) -> vec4&;
 			
-			friend vec4 operator+(vec4 left, const vec4& right);
-			friend vec4 operator-(vec4 left, const vec4& right);
-			friend vec4 operator*(vec4 left, const vec4& right);
-			friend vec4 operator/(vec4 left, const vec4& right);
+			friend auto operator+(vec4 left, const vec4& right) -> vec4;
+			friend auto operator-(vec4 left, const vec4& right) -> vec4;
+			friend auto operator*(vec4 left, const vec4& right) -> vec4;
+			friend auto operator/(vec4 left, const vec4& right) -> vec4;
 			
-			bool operator==(const vec4& other) const; 
-			bool operator!= (const vec4& other) const; 
+			auto operator==(const vec4& other) const -> bool; 
+			auto operator!= (const vec4& other) const -> bool; 
 		};
 
 } }

@@ -12,7 +12,7 @@ namespace Paradox { namespace graphics{
 		//std::vector<GLfloat> m_Vertices; 
 
 	public: 
-		Renderable() {}
+		Renderable() = default;
 		//std::vector<GLfloat> getVertices() const {
 		//	return m_Vertices; 
 		//}

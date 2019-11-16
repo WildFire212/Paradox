@@ -15,7 +15,7 @@ StealthState::~StealthState() {
 void StealthState::entry(PlayerBehavior* playerBehavior) {
 	std::cout << "STEALTH STATE" << std::endl;
 	this->timer = Time::getTime() / Time::SECONDS;
-	playerBehavior->getTransform()->translation.y -= m_HeightOffset; 
+	playerBehavior->m_Parent->getTransform()->move(vec3(0.0f,-m_HeightOffset,0.0f)); 
 		
 
 }
@@ -40,7 +40,7 @@ void StealthState::execute(PlayerBehavior* playerBehavior,float deltaTime) {
 	}
 }
 void StealthState::exit(PlayerBehavior* playerBehavior)  {
-	playerBehavior->getTransform()->translation.y += m_HeightOffset;
+	playerBehavior->getTransform()->move(vec3(0, m_HeightOffset,0));
 
 }
 StealthState* StealthState::Instance() {
@@ -50,6 +50,7 @@ StealthState* StealthState::Instance() {
 
 void StealthState::crouchWalk(PlayerBehavior * playerBehavior, float deltaTime)
 {
-	playerBehavior->getTransform()->translation +=
-		maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x, 0.0f, playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) * playerBehavior->m_MaxSpeed* m_PlayerSpeedFactor* deltaTime;
+	playerBehavior->getTransform()->move(
+		maths::vec3(playerBehavior->m_Parent->getComponent<Camera>()->getFront().x, 0.0f, playerBehavior->m_Parent->getComponent<Camera>()->getFront().z) * playerBehavior->m_MaxSpeed* m_PlayerSpeedFactor* deltaTime);
+	
 }

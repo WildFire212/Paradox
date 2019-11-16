@@ -65,20 +65,20 @@ public:
 	void boneTransforms(double timeInSeconds); 
 
 	
-	const aiNodeAnim* findNodeAnim(const aiAnimation* animation, std::string nodeName);
-	 Bone* findBone(std::string name); 
+	auto findNodeAnim(const aiAnimation* animation, std::string nodeName) -> const aiNodeAnim*;
+	 auto findBone(std::string name) -> Bone*; 
 
-	 vec3 calcInterpolatedScaling(float animationTime, const aiNodeAnim * nodeAnim);
-	 vec3 calcInterpolatedPosition (float animationTime , const aiNodeAnim* nodeAnim);
-	 quaternion calcInterpolatedRotation( float animationTime, const aiNodeAnim * nodeAnim);
+	 auto calcInterpolatedScaling(float animationTime, const aiNodeAnim * nodeAnim) -> vec3;
+	 auto calcInterpolatedPosition (float animationTime , const aiNodeAnim* nodeAnim) -> vec3;
+	 auto calcInterpolatedRotation( float animationTime, const aiNodeAnim * nodeAnim) -> quaternion;
 
 
-	 int findScaling(float animationTime , const aiNodeAnim * nodeAnim );
-	 int findRotation(float animationTime , const aiNodeAnim * nodeAnim );
-	 int findPosition(float animationTime , const aiNodeAnim * nodeAnim );
+	 auto findScaling(float animationTime , const aiNodeAnim * nodeAnim ) -> int;
+	 auto findRotation(float animationTime , const aiNodeAnim * nodeAnim ) -> int;
+	 auto findPosition(float animationTime , const aiNodeAnim * nodeAnim ) -> int;
 
 	 void setAnimatedModel(AnimatedModel* animatedModel); 
-	 const AnimatedModel& getAnimatedModel() const; 
+	 auto getAnimatedModel() const -> const AnimatedModel&; 
 
 };
 

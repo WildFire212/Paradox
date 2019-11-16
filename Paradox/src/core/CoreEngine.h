@@ -20,12 +20,12 @@ namespace Paradox {
 		RenderingEngine* m_RenderingEngine; 
 		Paradox::core::PhysicsEngine& m_PhysicsEngine; 
 	public:
-		CoreEngine(Scene& game, const char* TITLE, int height, int width, const int frameTime);
+		CoreEngine(Scene& game, const char* TITLE, int height, int width, int frameTime);
 		void start();
 		~CoreEngine(); 
 
-		RenderingEngine& getRenderingEngine(); 
-		Paradox::core::PhysicsEngine& getPhysicsEngine();
+		auto getRenderingEngine() -> RenderingEngine&; 
+		auto getPhysicsEngine() -> Paradox::core::PhysicsEngine&;
 	private:
 		void run();
 		void render(); 

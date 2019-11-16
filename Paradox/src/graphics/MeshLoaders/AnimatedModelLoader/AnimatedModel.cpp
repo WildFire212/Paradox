@@ -9,7 +9,7 @@ namespace Paradox {
 		AnimatedModel::AnimatedModel(std::string fileLocation)
 		{
 			load(fileLocation);
-			Texture texture("Textures/Test.png");
+			Texture texture("Textures/plain.jpg");
 			Material* material = new Material(texture, 0.1f, 0.1f, texture);
 			m_MeshResource->setMaterial(material); 
 		}
@@ -24,8 +24,10 @@ namespace Paradox {
 			m_Scene = m_Importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs );
 
 
-			if (!m_Scene || !m_Scene->HasAnimations())
+			if (!m_Scene )
 			{
+				printf("cannot open file %s", fileName);
+				if(!m_Scene->HasAnimations())
 				printf("Imported models doesn't contain any animation %s", fileName);
 			}
 

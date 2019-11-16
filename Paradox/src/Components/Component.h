@@ -25,10 +25,11 @@ public:
 	virtual void render(const RenderingEngine& renderingEngine)  ;
 	virtual void addToEngine(CoreEngine& engine);
 	
+
 	void setParent(GameObject* parent); 
 	~Component();
 	//getters
-	Transform* getTransform() ;
+	auto getTransform() -> Transform* ;
 };
 
 } }

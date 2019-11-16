@@ -20,7 +20,7 @@ private:
 
 	float** m_Heights ;
 	
-	float getHeight(int x, int y, unsigned char* texData) const;
+	auto getHeight(int x, int y, unsigned char* texData) const -> float;
 
 	//Texture* m_TerrainTexture; 
 	MeshRenderer* m_TerrainMesh;
@@ -40,16 +40,16 @@ public:
 	//float x;
 	//float z;
 
-	 Mesh* generateTerrain(const char* HeightMapLocation,Texture* m_TerrainTexture, int gridX, int gridZ);
-	const float getHeightOfTerrain(float worldX, float worldZ) const; 
-	const vec3 getNormal(float worldX, float worldZ) const; 
+	 auto generateTerrain(const char* HeightMapLocation,Texture* m_TerrainTexture, int gridX, int gridZ) -> Mesh*;
+	auto getHeightOfTerrain(float worldX, float worldZ) const -> const float; 
+	auto getNormal(float worldX, float worldZ) const -> const vec3; 
 	
 	//void render(const RenderingEngine& renderEngine) override;
 	~Terrain();
 private: 
 
-	vec3 calculateNormal(int x, int z, unsigned char* texData) const;
-	const float barryCentric(vec3 p1, vec3 p2, vec3 p3, vec2 pos) const;
+	auto calculateNormal(int x, int z, unsigned char* texData) const -> vec3;
+	auto barryCentric(vec3 p1, vec3 p2, vec3 p3, vec2 pos) const -> const float;
 };
 
 } }

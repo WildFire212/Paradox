@@ -29,7 +29,7 @@ namespace Paradox {
 			float distanceFromSphere = distanceFromCenter - sphereCollider.getRadius(); 
 
 
-			return IntersectData(distanceFromSphere < 0.0f , distanceFromSphere * m_Normal);
+			return IntersectData(distanceFromSphere < 0.0f , m_Normal,distanceFromSphere);
 		}
 	}
 }

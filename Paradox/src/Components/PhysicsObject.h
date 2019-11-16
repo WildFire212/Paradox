@@ -31,20 +31,20 @@ public:
 	//overriden functions 
 	void update(float deltaTime) override; 
 	//getters 
-	inline const vec3 getPosition() const {
+	inline auto getPosition() const -> const vec3 {
 		return m_Position;
 	}
-	inline const vec3 getVelocity() const {
+	inline auto getVelocity() const -> const vec3 {
 		return m_Velocity; 
 	}
-	inline Collider& getCollider() {
+	inline auto getCollider() -> Collider& {
 		vec3 translation = m_Position - m_OldPosition; 
 		m_OldPosition = m_Position;		
 		m_Collider->transform(translation); 
 		return *m_Collider; 
 	}
 
-	inline const float getMass() const {
+	inline auto getMass() const -> const float {
 		return m_Mass; 
 	}
 	//setters 

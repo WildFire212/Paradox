@@ -16,6 +16,6 @@ namespace Paradox {
 			void bind() const; 
 			void unbind() const; 
 			
-			GLuint getComponentCount() const; 
+			auto getComponentCount() const -> GLuint; 
 		};
 } }

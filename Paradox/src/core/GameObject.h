@@ -27,11 +27,15 @@ private:
 	Transform* m_Transform; 
 	CoreEngine* m_Engine; 
 	Shader* m_Shader; 
+
+	//movement 
 public:
+	vec3 m_Move; 
 	GameObject();
 	
 	explicit GameObject(std::string name); 
 
+	//game engine functions 
 	virtual void processEvents() ;
 	virtual void update(float deltaTime);
 	virtual void render(const RenderingEngine& engine) ;
@@ -40,16 +44,19 @@ public:
 	virtual void updateAll(float deltaTime) ;
 	virtual void renderAll(const RenderingEngine& engine) ; 
 
+	//addition of child and comoponent
 	void addChild( GameObject* child);
-	void addComponent(Component* component); 
+	void addComponent(Component* component);
+
+	//getters and setters 
 	void setEngine(CoreEngine& engine); 
 	void setScene(Scene* scene); 
 	void setName(std::string name); 
-	const std::string& getName() const; 
-	GameObject* getObject(std::string name); 
-	Transform* getTransform() const; 
+	auto getName() const -> const std::string&; 
+	auto getObject(std::string name) -> GameObject*; 
+	auto getTransform() const -> Transform*; 
 	template<class T> 
-	inline T* getComponent() {
+	inline auto getComponent() -> T* {
 		try {
 			for (std::vector<Component*>::iterator it = m_Components.begin(); it != m_Components.end(); ++it)
 			{
@@ -67,6 +74,9 @@ public:
 		}
 	}
 
+
+	//additional 
+	void move(vec3 Move); 
 	~GameObject();
 };
 

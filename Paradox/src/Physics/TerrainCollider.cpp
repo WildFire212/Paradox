@@ -21,7 +21,7 @@ namespace Paradox {
 		//calculate normal at that point 
 		//vec3 normal = calcTerrainNormal(sphereCollider.getCenter());
 
-		return IntersectData(distanceFromSphere < 0.0f, distanceFromSphere);
+		return IntersectData(distanceFromSphere < 0.0f,vec3(0,0,0) ,distanceFromSphere);
 	}
 
 } }

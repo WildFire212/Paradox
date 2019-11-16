@@ -4,7 +4,7 @@ using namespace Paradox;
 namespace Paradox {
 
 	class Transform {
-	public: 
+	private: 
 		maths::vec3 translation; 
 		maths::quaternion rotation; 
 		maths::vec3 scale; 
@@ -21,11 +21,12 @@ namespace Paradox {
 		Transform(); 
 
 		void update() ;
-		bool hasChanged();
+		auto hasChanged() -> bool;
 		
-		 const maths::mat4 getTransformation() ; 
-		 const maths::mat4 getParentMatrix()  ; 
-	
+		 auto getTransformation() -> const maths::mat4 ; 
+		 auto getParentMatrix() -> const maths::mat4  ; 
+		 auto getTranslation() -> const maths::vec3; 
+
 
 
 		 void setTranslation(maths::vec3 translation); 
@@ -38,9 +39,11 @@ namespace Paradox {
 		void setParent(Transform* parent); 
 
 		void rotate(maths::vec3 axis, float angle); 
+		void move(maths::vec3 move); 
+
 	private: 
-		const maths::mat4 initTranslationMatrix() const; 
-		const maths::mat4 initScaleMatrix() const; 
-		const maths::mat4 initRotationMatrix() const; 
+		auto initTranslationMatrix() const -> const maths::mat4; 
+		auto initScaleMatrix() const -> const maths::mat4; 
+		auto initRotationMatrix() const -> const maths::mat4; 
 	};
 }

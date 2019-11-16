@@ -14,27 +14,27 @@ namespace Paradox {
 			Camera();
 			Camera(maths::vec3 startposition, maths::vec3 startUp, GLfloat startpitch, GLfloat startyaw, GLfloat startturnSpeed, GLfloat  startmoveSpeed,GLfloat fov, GLfloat aspectRatio, GLfloat near, GLfloat far);
 			~Camera();
-			maths::mat4 calculateViewMatrix() const;
+			auto calculateViewMatrix() const -> maths::mat4;
 			void updateView() ;
 			void update(float deltaTime) override;
 
-			void addToEngine(CoreEngine& coreEngine);
+			void addToEngine(CoreEngine& coreEngine) override;
 			void mouseControl(GLfloat xChange, GLfloat yChange);
 			void keysControl(bool* keys);
 
 			void MoveCameraForReflection(maths::vec3 ChangePos);
 
-			const maths::vec3 getPosition() const;
+			auto getPosition() const -> const maths::vec3;
 			void setPosition(maths::vec3 pos);
 			void setDirection(maths::vec3 pos);
 			void SwitchToFace(int size);
 			maths::vec3 position;
 
-			maths::mat4 getProjection() const; 
+			auto getProjection() const -> maths::mat4; 
 
 			//getters 
 			
-			const maths::vec3 getFront() const;
+			auto getFront() const -> const maths::vec3;
 			
 		private:
 

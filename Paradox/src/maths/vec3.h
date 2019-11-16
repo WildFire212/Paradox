@@ -1,5 +1,5 @@
 #pragma once
-#include<math.h>
+#include<cmath>
 namespace Paradox {
 	namespace maths {
 
@@ -8,34 +8,34 @@ namespace Paradox {
 			vec3() ; 
 			vec3(float x, float y,float z);
 			vec3(float x); 
-			float length(); 
+			auto length() -> float; 
 			void normalize();
-			vec3 cross(const vec3& other); 
-			float dot(const vec3& other); 
-			vec3 Max(const vec3& other); 
-			float Max(); 
-			vec3 reflect(vec3 normal); 
-			vec3& Add(const vec3& other);	//return by reference because 
-			vec3& Subtract(const vec3& other);	
-			vec3& Multiply(const vec3& other);
-			vec3& Divide(const vec3& other);
+			auto cross(const vec3& other) -> vec3; 
+			auto dot(const vec3& other) -> float; 
+			auto Max(const vec3& other) -> vec3; 
+			auto Max() -> float; 
+			auto reflect(vec3 normal) -> vec3; 
+			auto Add(const vec3& other) -> vec3&;	//return by reference because 
+			auto Subtract(const vec3& other) -> vec3&;	
+			auto Multiply(const vec3& other) -> vec3&;
+			auto Divide(const vec3& other) -> vec3&;
 			
-			friend vec3 operator+(vec3 left, const vec3& right);
-			friend vec3 operator-(vec3 left, const vec3& right);
-			friend vec3 operator*(vec3 left, const vec3& right);
-			friend vec3 operator/(vec3 left, const vec3& right);
+			friend auto operator+(vec3 left, const vec3& right) -> vec3;
+			friend auto operator-(vec3 left, const vec3& right) -> vec3;
+			friend auto operator*(vec3 left, const vec3& right) -> vec3;
+			friend auto operator/(vec3 left, const vec3& right) -> vec3;
 
-			friend vec3 operator+(vec3 left, float right);
-			friend vec3 operator-(vec3 left, float right);
-			friend vec3 operator*(vec3 left, float right);
-			friend vec3 operator/(vec3 left, float right);
+			friend auto operator+(vec3 left, float right) -> vec3;
+			friend auto operator-(vec3 left, float right) -> vec3;
+			friend auto operator*(vec3 left, float right) -> vec3;
+			friend auto operator/(vec3 left, float right) -> vec3;
 			
 
-			vec3 operator+=(vec3 right);
-			vec3 operator-=(vec3 right);
+			auto operator+=(vec3 right) -> vec3;
+			auto operator-=(vec3 right) -> vec3;
 
-			bool operator==(const vec3& other) const; 
-			bool operator!= (const vec3& other) const; 
+			auto operator==(const vec3& other) const -> bool; 
+			auto operator!= (const vec3& other) const -> bool; 
 		};
 
 } }

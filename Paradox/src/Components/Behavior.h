@@ -10,14 +10,13 @@ namespace Paradox {
 		 class Behavior : public Component {
 		protected:
 
-			virtual void update(float deltaTime) override {
+			void update(float deltaTime) override {
 				
 			}
 
 		protected : 
-			Behavior() {
-			}
-			~Behavior() {}
+			Behavior() = default;
+			~Behavior() = default;
 
 		};
 

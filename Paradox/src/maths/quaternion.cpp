@@ -173,4 +173,22 @@ bool quaternion::operator!=(const quaternion & other)
 {
 	return !(*this == other); 
 }
-} }
+}
+auto maths::operator*(quaternion left, const quaternion& right) -> quaternion
+{
+	return left.Multiply(right); 
+	
+}
+auto maths::operator+(quaternion left, const quaternion& right) -> quaternion
+{
+	return left.Add(right);
+}
+auto maths::operator-(quaternion left, const quaternion& right) -> quaternion
+{
+	return left.Subtract(right);
+}
+auto maths::operator/(quaternion left, const quaternion& right) -> quaternion
+{
+	return quaternion(); 
+}
+}

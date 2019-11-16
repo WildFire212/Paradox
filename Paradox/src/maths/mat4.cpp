@@ -48,9 +48,9 @@ namespace Paradox {
 					float sum = 0.0f; 
 					for (int32_t e = 0; e < 4; e++)
 					{
-						sum += elements[e * 4 + row ] * other.elements[col * 4 + e ];
+						sum += elements[e * 4 +row ] * other.elements[col * 4 + e ];
 					}
-					data[row + col * 4] = sum; 
+					data[row + 4 * col ] = sum;
 				}
 			}
 			memcpy(elements, data, 4 * 4 * sizeof(float));
@@ -152,9 +152,9 @@ namespace Paradox {
 		mat4 mat4::Translate(const vec3& translation) {
 			mat4 result(1.0f);
 
-			result.elements[0+4 *3] = translation.x;
-			result.elements[1+4 *3] = translation.y;
-			result.elements[2+4 *3] = translation.z;
+			result.elements[0+ 4 *  3] = translation.x;
+			result.elements[1+ 4 *  3] = translation.y;
+			result.elements[2+ 4 *  3] = translation.z;
 			return result; 
 		}
 
@@ -169,7 +169,7 @@ namespace Paradox {
 			result.elements[1 + 4 * 0] = u.x;	result.elements[1 + 4 * 1] = u.y;	result.elements[1 + 4 * 2] = u.z;	result.elements[1 + 4 * 3] = 0;
 			result.elements[2 + 4 * 0] = f.x;	result.elements[2 + 4 * 1] = f.y;	result.elements[2 + 4 * 2] = f.z;	result.elements[2 + 4 * 3] = 0;
 			result.elements[3 + 4 * 0] = 0;		result.elements[3 + 4 * 1] = 0;		result.elements[3 + 4 * 2] = 0;		result.elements[3 + 4 * 3] = 1;
-			
+
 				return result; 																												
 		}
 
@@ -198,10 +198,10 @@ namespace Paradox {
 			//result.rows[0] = vec4(((1.0f - qyqy2) - qzqz2), (qxqy2 - qzqw2), (qxqz2 + qyqw2), 0.0f);
 			//result.rows[1] = vec4((qxqy2 + qzqw2), ((1.0f - qxqx2) - qzqz2), (qyqz2 - qxqw2), 0.0f);
 			//result.rows[2] = vec4((qxqz2 - qyqw2), (qyqz2 + qxqw2), ((1.0f - qxqx2) - qyqy2), 0.0f);
-			result.elements[0 + 4 * 0] = ((1.0f - qyqy2) - qzqz2);	result.elements[1 + 4 * 0] = (qxqy2 - qzqw2);	result.elements[2 + 4 * 0] = (qxqz2 + qyqw2);	result.elements[3 + 4 * 0] = 0.0f;
-			result.elements[0 + 4 * 1] = (qxqy2 + qzqw2);	result.elements[1 + 4 * 1] = ((1.0f - qxqx2) - qzqz2);	result.elements[2 + 4 * 1] = (qyqz2 - qxqw2);	result.elements[3 + 4 * 1] = 0.0f;
-			result.elements[0 + 4 * 2] = (qxqz2 - qyqw2);	result.elements[1+ 4 * 2] = (qyqz2 + qxqw2);	result.elements[2 + 4 * 2] = ((1.0f - qxqx2) - qyqy2);	result.elements[3 + 4 * 2] = 0.0f;
-			//result.elements[3 + 4 * 0] = 0;		result.elements[3 + 4 * 1] = 0;		result.elements[3 + 4 * 2] = 0;		result.elements[3 + 4 * 3] = 1;
+			result.elements[0*  4 + 0] = ((1.0f - qyqy2) - qzqz2);	result.elements[1 * 4 + 0] = (qxqy2 - qzqw2);	result.elements[2 * 4+  0] = (qxqz2 + qyqw2);	result.elements[3 * 4 + 0] = 0.0f;
+			result.elements[0*  4 + 1] = (qxqy2 + qzqw2);	result.elements[1  * 4 + 1] = ((1.0f - qxqx2) - qzqz2);	result.elements[2 * 4+  1] = (qyqz2 - qxqw2);	result.elements[3 * 4 + 1] = 0.0f;
+			result.elements[0*  4 + 2] = (qxqz2 - qyqw2);	result.elements[1 * 4 + 2] = (qyqz2 + qxqw2);	result.elements[2*  4 +  2] = ((1.0f - qxqx2) - qyqy2);	result.elements[3 * 4 + 2] = 0.0f;
+			result.elements[3*  4 + 0] = 0;		result.elements[3 * 4 + 1] = 0;		result.elements[3 * 4 + 2] = 0;		result.elements[3 * 4 + 3] = 1.0f;
 
 			return result;
 		}
@@ -245,6 +245,35 @@ namespace Paradox {
 			return result; 
 
 		}
+
+	/*	auto mat4::Rotate(const quaternion& quat) -> mat4
+		{
+			mat4 result = Identity();
+
+			float qx, qy, qz, qw, qx2, qy2, qz2, qxqx2, qyqy2, qzqz2, qxqy2, qyqz2, qzqw2, qxqz2, qyqw2, qxqw2;
+			qx = quat.x;
+			qy = quat.y;
+			qz = quat.z;
+			qw = quat.w;
+			qx2 = (qx + qx);
+			qy2 = (qy + qy);
+			qz2 = (qz + qz);
+			qxqx2 = (qx * qx2);
+			qxqy2 = (qx * qy2);
+			qxqz2 = (qx * qz2);
+			qxqw2 = (qw * qx2);
+			qyqy2 = (qy * qy2);
+			qyqz2 = (qy * qz2);
+			qyqw2 = (qw * qy2);
+			qzqz2 = (qz * qz2);
+			qzqw2 = (qw * qz2);
+
+			result.elements[0 + 0 * 4] = ((1.0f - qyqy2) - qzqz2); result.elements[0 + 1* 4] =(qxqy2 - qzqw2)				; result.elements[0 + 2 * 4] = (qxqz2 + qyqw2);
+			result.elements[1 + 0 * 4] = (qxqy2 + qzqw2);		   result.elements[1 + 1 * 4]= ((1.0f - qxqx2) - qzqz2); result.elements[1 + 2 * 4] = (qyqz2 - qxqw2);
+			result.elements[2 + 0 * 4] = (qxqz2 - qyqw2);		   result.elements[2 +  1* 4]= (qyqz2 + qxqw2);         result.elements[2 + 2 * 4] = ((1.0f - qxqx2) - qyqy2);
+			return result;
+			//return mat4();
+		}*/
 
 		mat4 mat4::Scale(const vec3& scale)
 		{

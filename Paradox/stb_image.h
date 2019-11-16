@@ -302,7 +302,7 @@ RECENT REVISION HISTORY:
 
 
 #ifndef STBI_NO_STDIO
-#include <stdio.h>
+#include <cstdio>
 #endif // STBI_NO_STDIO
 
 #define STBI_VERSION 1
@@ -317,8 +317,8 @@ enum
    STBI_rgb_alpha  = 4
 };
 
-typedef unsigned char stbi_uc;
-typedef unsigned short stbi_us;
+using stbi_uc = unsigned char;
+using stbi_us = unsigned short;
 
 #ifdef __cplusplus
 extern "C" {
@@ -351,12 +351,12 @@ typedef struct
 // 8-bits-per-channel interface
 //
 
-STBIDEF stbi_uc *stbi_load_from_memory   (stbi_uc           const *buffer, int len   , int *x, int *y, int *channels_in_file, int desired_channels);
-STBIDEF stbi_uc *stbi_load_from_callbacks(stbi_io_callbacks const *clbk  , void *user, int *x, int *y, int *channels_in_file, int desired_channels);
+STBIDEF auto stbi_load_from_memory   (stbi_uc           const *buffer, int len   , int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_uc *;
+STBIDEF auto stbi_load_from_callbacks(stbi_io_callbacks const *clbk  , void *user, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_uc *;
 
 #ifndef STBI_NO_STDIO
-STBIDEF stbi_uc *stbi_load            (char const *filename, int *x, int *y, int *channels_in_file, int desired_channels);
-STBIDEF stbi_uc *stbi_load_from_file  (FILE *f, int *x, int *y, int *channels_in_file, int desired_channels);
+STBIDEF auto stbi_load            (char const *filename, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_uc *;
+STBIDEF auto stbi_load_from_file  (FILE *f, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_uc *;
 // for stbi_load_from_file, file pointer is left pointing immediately after image
 #endif
 
@@ -365,12 +365,12 @@ STBIDEF stbi_uc *stbi_load_from_file  (FILE *f, int *x, int *y, int *channels_in
 // 16-bits-per-channel interface
 //
 
-STBIDEF stbi_us *stbi_load_16_from_memory   (stbi_uc const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels);
-STBIDEF stbi_us *stbi_load_16_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *channels_in_file, int desired_channels);
+STBIDEF auto stbi_load_16_from_memory   (stbi_uc const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_us *;
+STBIDEF auto stbi_load_16_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_us *;
 
 #ifndef STBI_NO_STDIO
-STBIDEF stbi_us *stbi_load_16          (char const *filename, int *x, int *y, int *channels_in_file, int desired_channels);
-STBIDEF stbi_us *stbi_load_from_file_16(FILE *f, int *x, int *y, int *channels_in_file, int desired_channels);
+STBIDEF auto stbi_load_16          (char const *filename, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_us *;
+STBIDEF auto stbi_load_from_file_16(FILE *f, int *x, int *y, int *channels_in_file, int desired_channels) -> stbi_us *;
 #endif
 
 ////////////////////////////////////
@@ -378,12 +378,12 @@ STBIDEF stbi_us *stbi_load_from_file_16(FILE *f, int *x, int *y, int *channels_i
 // float-per-channel interface
 //
 #ifndef STBI_NO_LINEAR
-   STBIDEF float *stbi_loadf_from_memory     (stbi_uc const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels);
-   STBIDEF float *stbi_loadf_from_callbacks  (stbi_io_callbacks const *clbk, void *user, int *x, int *y,  int *channels_in_file, int desired_channels);
+   STBIDEF auto stbi_loadf_from_memory     (stbi_uc const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels) -> float *;
+   STBIDEF auto stbi_loadf_from_callbacks  (stbi_io_callbacks const *clbk, void *user, int *x, int *y,  int *channels_in_file, int desired_channels) -> float *;
 
    #ifndef STBI_NO_STDIO
-   STBIDEF float *stbi_loadf            (char const *filename, int *x, int *y, int *channels_in_file, int desired_channels);
-   STBIDEF float *stbi_loadf_from_file  (FILE *f, int *x, int *y, int *channels_in_file, int desired_channels);
+   STBIDEF auto stbi_loadf            (char const *filename, int *x, int *y, int *channels_in_file, int desired_channels) -> float *;
+   STBIDEF auto stbi_loadf_from_file  (FILE *f, int *x, int *y, int *channels_in_file, int desired_channels) -> float *;
    #endif
 #endif
 
@@ -398,28 +398,28 @@ STBIDEF stbi_us *stbi_load_from_file_16(FILE *f, int *x, int *y, int *channels_i
 #endif // STBI_NO_LINEAR
 
 // stbi_is_hdr is always defined, but always returns false if STBI_NO_HDR
-STBIDEF int    stbi_is_hdr_from_callbacks(stbi_io_callbacks const *clbk, void *user);
-STBIDEF int    stbi_is_hdr_from_memory(stbi_uc const *buffer, int len);
+STBIDEF auto    stbi_is_hdr_from_callbacks(stbi_io_callbacks const *clbk, void *user) -> int;
+STBIDEF auto    stbi_is_hdr_from_memory(stbi_uc const *buffer, int len) -> int;
 #ifndef STBI_NO_STDIO
-STBIDEF int      stbi_is_hdr          (char const *filename);
-STBIDEF int      stbi_is_hdr_from_file(FILE *f);
+STBIDEF auto      stbi_is_hdr          (char const *filename) -> int;
+STBIDEF auto      stbi_is_hdr_from_file(FILE *f) -> int;
 #endif // STBI_NO_STDIO
 
 
 // get a VERY brief reason for failure
 // NOT THREADSAFE
-STBIDEF const char *stbi_failure_reason  (void);
+STBIDEF auto stbi_failure_reason  (void) -> const char *;
 
 // free the loaded image -- this is just free()
 STBIDEF void     stbi_image_free      (void *retval_from_stbi_load);
 
 // get image dimensions & components without fully decoding
-STBIDEF int      stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp);
-STBIDEF int      stbi_info_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp);
+STBIDEF auto      stbi_info_from_memory(stbi_uc const *buffer, int len, int *x, int *y, int *comp) -> int;
+STBIDEF auto      stbi_info_from_callbacks(stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp) -> int;
 
 #ifndef STBI_NO_STDIO
-STBIDEF int      stbi_info            (char const *filename,     int *x, int *y, int *comp);
-STBIDEF int      stbi_info_from_file  (FILE *f,                  int *x, int *y, int *comp);
+STBIDEF auto      stbi_info            (char const *filename,     int *x, int *y, int *comp) -> int;
+STBIDEF auto      stbi_info_from_file  (FILE *f,                  int *x, int *y, int *comp) -> int;
 
 #endif
 
@@ -439,13 +439,13 @@ STBIDEF void stbi_set_flip_vertically_on_load(int flag_true_if_should_flip);
 
 // ZLIB client - used by PNG, available for other purposes
 
-STBIDEF char *stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen);
-STBIDEF char *stbi_zlib_decode_malloc_guesssize_headerflag(const char *buffer, int len, int initial_size, int *outlen, int parse_header);
-STBIDEF char *stbi_zlib_decode_malloc(const char *buffer, int len, int *outlen);
-STBIDEF int   stbi_zlib_decode_buffer(char *obuffer, int olen, const char *ibuffer, int ilen);
+STBIDEF auto stbi_zlib_decode_malloc_guesssize(const char *buffer, int len, int initial_size, int *outlen) -> char *;
+STBIDEF auto stbi_zlib_decode_malloc_guesssize_headerflag(const char *buffer, int len, int initial_size, int *outlen, int parse_header) -> char *;
+STBIDEF auto stbi_zlib_decode_malloc(const char *buffer, int len, int *outlen) -> char *;
+STBIDEF auto   stbi_zlib_decode_buffer(char *obuffer, int olen, const char *ibuffer, int ilen) -> int;
 
-STBIDEF char *stbi_zlib_decode_noheader_malloc(const char *buffer, int len, int *outlen);
-STBIDEF int   stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen);
+STBIDEF auto stbi_zlib_decode_noheader_malloc(const char *buffer, int len, int *outlen) -> char *;
+STBIDEF auto   stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen) -> int;
 
 
 #ifdef __cplusplus

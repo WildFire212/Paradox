@@ -12,6 +12,12 @@
 
 	class Model
 	{
+	public : 
+		struct Extents {
+			maths::vec3 m_MinExtents; 
+			maths::vec3 m_MaxExtents; 
+
+		}m_Extents;
 	private: 
 		std::vector<MeshResource*> m_MeshResourceList; 
 		std::vector<unsigned int> m_MeshToTex; 
@@ -20,7 +26,7 @@
 		Model();
 		Model(std::string fileLocation);
 		~Model();	
-		std::vector<MeshResource*> getMeshResourceList() const; 
+		auto getMeshResourceList() const -> std::vector<MeshResource*>; 
 	private: 
 		void load(std::string fileLocation);
 

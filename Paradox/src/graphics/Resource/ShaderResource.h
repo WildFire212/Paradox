@@ -14,8 +14,8 @@ private:
 	std::vector<std::string> m_UniformNames;
 	std::vector<std::string> m_UniformTypes; 
 public:
-	ShaderResource() {}
-	~ShaderResource() {}
+	ShaderResource() = default;
+	~ShaderResource() = default;
 
 	void setShaderProgram(GLuint shaderProgram)
 	{
@@ -26,14 +26,14 @@ public:
 	void addUniformName(std::string name) {
 		m_UniformNames.push_back(name);
 	}
-	inline const std::vector<std::string> getUniformNames() {
+	inline auto getUniformNames() -> const std::vector<std::string> {
 		return m_UniformNames;
 	}
 	//uniform types 
 	void addUniformType(std::string type) {
 		m_UniformTypes.push_back(type);
 	}
-	inline const std::vector<std::string> getUniformTypes() {
+	inline auto getUniformTypes() -> const std::vector<std::string> {
 		return m_UniformTypes;
 	}
 
@@ -46,7 +46,7 @@ public:
 		}
 	}
 	
-	inline const GLuint getShaderProgram()
+	inline auto getShaderProgram() -> const GLuint
 	{
 		return m_ShaderProgram;
 	}

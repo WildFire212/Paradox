@@ -282,7 +282,7 @@ namespace Paradox {
 				//transform uniforms 
 				if (uniformName.find("T_") == 0)
 				{
-					glm::mat4 proj = glm::perspective(45.0f, 1.0f, 0.1f, 100.0f);
+					glm::mat4 proj = glm::perspective(45.0f, 1.0f, 0.1f, 10000.0f);
 					std::string unprefixedName = uniformName.substr(2, uniformName.size() - 2);
 					if (unprefixedName == "projection")
 						this->SEtmat4(uniformName.c_str(), proj);

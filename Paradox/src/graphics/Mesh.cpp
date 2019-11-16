@@ -1,8 +1,10 @@
 #include "Mesh.h"
 using namespace std;
+using namespace maths;
 std::map<std::string, std::shared_ptr<Model>> Paradox::graphics::Mesh::m_LoadedMeshes;
 Paradox::graphics::Mesh::Mesh(const char * fileLocation)
 {
+	m_ColliderData = { vec3(1000,1000,1000),vec3(-1000,-1000,-1000),vec3(-1000,-1000,-1000),-1.f };
 	m_isModel = true;
 	m_FileLocation = std::string(fileLocation);
 	auto find = m_LoadedMeshes.find(m_FileLocation);
@@ -15,10 +17,14 @@ Paradox::graphics::Mesh::Mesh(const char * fileLocation)
 		m_Model = std::make_shared<Model>(load(fileLocation));
 		m_LoadedMeshes[m_FileLocation] = m_Model;
 	}
+	std::vector<GLfloat> a;
+	calculateColliderData(a); 
 }
 
 Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushort> indices, GLuint vertexCount, GLuint indexCount, std::vector<GLfloat> texCoords, Material* material,bool calculateNormals)
 {
+	m_ColliderData = { vec3(1000,1000,1000),vec3(-1000,-1000,-1000),vec3(-1000,-1000,-1000),-1.f };
+
 	m_isModel = false;
 	m_FileLocation = ""; 
 	m_MeshResource = std::make_shared<MeshResource>(MeshResource()); 
@@ -34,11 +40,13 @@ Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushor
 		normals.push_back(0.0f);
 	}
 	m_MeshResource->setNormals(calculateAverageNormals(indices, indexCount, vertices, vertexCount,normals)); 
-
+	calculateColliderData(vertices);
 }
 
 Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushort> indices, GLuint vertexCount, GLuint indexCount, std::vector<GLfloat> texCoords, Material* material,std::vector<GLfloat> normals,bool calculateNormals)
 {
+	m_ColliderData = { vec3(1000,1000,1000),vec3(-1000,-1000,-1000),vec3(-1000,-1000,-1000),-1.f };
+
 	m_isModel = false;
 	m_FileLocation = ""; 
 	m_MeshResource = std::make_shared<MeshResource>(MeshResource());
@@ -58,8 +66,10 @@ Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushor
 	}
 	
 	m_MeshResource->setNormals(normals);
+	calculateColliderData(vertices);
 
 }
+
 
 
 Paradox::graphics::Mesh::~Mesh()
@@ -70,6 +80,10 @@ Paradox::graphics::Mesh::~Mesh()
 	{
 		m_LoadedMeshes.erase(m_FileLocation);
 	}
+}
+auto Paradox::graphics::Mesh::updateCollider(maths::mat4 transformationMatrix)
+{
+		//update COlliers usinng transform matrix
 }
 const MeshResource & Paradox::graphics::Mesh::getMeshResource() const
 {
@@ -92,6 +106,11 @@ const Material & Paradox::graphics::Mesh::getMaterial() const
 {
 	// TODO: insert return statement here
 	return m_MeshResource->getMaterial(); 
+}
+
+auto Paradox::graphics::Mesh::getColliderData() const -> const ColliderData&
+{
+	return m_ColliderData; 
 }
 
 
@@ -125,6 +144,69 @@ const Material & Paradox::graphics::Mesh::getMaterial() const
  Model Paradox::graphics::Mesh::load(std::string fileLocation)
  {
 	 return Model(fileLocation);
+ }
+
+ auto Paradox::graphics::Mesh::calculateColliderData(std::vector <GLfloat> vertices)->void
+ {
+	 if (m_isModel)
+	 {
+		 //do something if it is model 
+		 m_ColliderData.m_MinExtents = m_Model->m_Extents.m_MinExtents;
+		 m_ColliderData.m_MaxExtents= m_Model->m_Extents.m_MaxExtents;
+		
+	 }
+	 else if (!m_Model) 
+	 {
+		 //do something if its a mesh (not model)_ 
+		 for (size_t i = 0; i < vertices.size(); i+=3)
+		 {
+			 auto calcExtents = [=](float x, float y, float z) {
+				 if (x > m_ColliderData.m_MaxExtents.x)
+				 {
+					 m_ColliderData.m_MaxExtents.x = x;
+				 }
+				 if (y > m_ColliderData.m_MaxExtents.y)
+				 {
+					 m_ColliderData.m_MaxExtents.y = y;
+				 }
+				 if (z > m_ColliderData.m_MaxExtents.z)
+				 {
+					 m_ColliderData.m_MaxExtents.z = z;
+				 }
+						
+				 if (x < m_ColliderData.m_MinExtents.x)
+				 {
+					 m_ColliderData.m_MinExtents.x = x;
+				 }
+				 if (y < m_ColliderData.m_MinExtents.y)
+				 {
+					 m_ColliderData.m_MinExtents.y = y;
+				 }
+				 if (z < m_ColliderData.m_MinExtents.z)
+				 {
+					 m_ColliderData.m_MinExtents.z = z;
+				 }
+
+			 };
+			 calcExtents(vertices[i],vertices[i + 1],vertices[i+ 2]);
+		 }
+	 }
+	 float xhalf = (m_ColliderData.m_MaxExtents.x - m_ColliderData.m_MinExtents.x) / 2.0f;
+	 float yhalf = (m_ColliderData.m_MaxExtents.y - m_ColliderData.m_MinExtents.y) / 2.0f;
+	 float zhalf = (m_ColliderData.m_MaxExtents.z - m_ColliderData.m_MinExtents.z) / 2.0f;
+	 m_ColliderData.m_Center = maths::vec3(m_ColliderData.m_MinExtents.x + xhalf, m_ColliderData.m_MinExtents.y + yhalf, m_ColliderData.m_MinExtents.z + zhalf);
+	 if (xhalf > yhalf&& xhalf > zhalf)
+	 {
+		 m_ColliderData.m_Radius = xhalf;
+	 }
+	 else if (yhalf > xhalf&& yhalf > zhalf)
+	 {
+		 m_ColliderData.m_Radius = yhalf;
+	 }
+	 else if (zhalf > xhalf&& zhalf > yhalf)
+	 {
+		 m_ColliderData.m_Radius = zhalf;
+	 }
  }
 
 

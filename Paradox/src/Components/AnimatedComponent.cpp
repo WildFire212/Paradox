@@ -1,6 +1,6 @@
 #include "AnimatedComponent.h"
 #include"../core/GameObject.h"
-
+#include"glm.hpp"
 namespace Paradox {
 	namespace graphics {
 
@@ -87,7 +87,7 @@ void Paradox::graphics::AnimatedComponent::submit(const MeshResource & meshResou
 		m_BufferMap->m_BoneData3 = maths::vec2(boneData[i].z.boneID,  boneData[i].z.weight);
 		m_BufferMap->m_BoneData4 = maths::vec2(boneData[i].w.boneID,  boneData[i].w.weight);
 		m_BufferMap++;
-
+		
 	}
 }
 

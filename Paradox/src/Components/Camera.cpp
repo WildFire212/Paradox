@@ -70,8 +70,9 @@ namespace Paradox {
 		void Camera::update(float deltaTime)
 		{
 			//default controllable 
-			this->position = this->m_Parent->getTransform()->translation;
-			//std::cout << this->m_Parent->getTransform()->translation.x << std::endl;
+			this->position = this->m_Parent->getTransform()->getTranslation();
+			std::cout << this->m_Parent->getTransform()->getTranslation().y << std::endl;
+		//std::cout << pitch << "  " << yaw<< std::endl;
 			this->mouseControl(graphics::Window::getChangeX(), graphics::Window::getChangeY());
 			//this->keysControl(graphics::Window::m_Keys);
 		}

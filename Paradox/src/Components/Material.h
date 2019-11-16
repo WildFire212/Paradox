@@ -17,8 +17,8 @@ public:
 	void UseMaterial(GLuint specularIntensityLocation, GLuint shininessLocation, GLuint diffuseTextureLocation) const;
 	void addTexture(std::string textureName, const Texture& texture);
 
-	GLfloat getFloat(std::string valueName) const; 
-	GLuint getTexture(std::string textureName) const; 
+	auto getFloat(std::string valueName) const -> GLfloat; 
+	auto getTexture(std::string textureName) const -> GLuint; 
 	~Material();	
 
 private:

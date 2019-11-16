@@ -20,12 +20,12 @@ private:
 public:
 	Texture(); 
 	Texture(const char* fileLocation);
-	const TextureResource& getTextureResource() const; 
+	auto getTextureResource() const -> const TextureResource&; 
 	~Texture();
 	
 
 private: 
-	TextureResource load(const char* fileLocation);
+	auto load(const char* fileLocation) -> TextureResource;
 	
 };
 
