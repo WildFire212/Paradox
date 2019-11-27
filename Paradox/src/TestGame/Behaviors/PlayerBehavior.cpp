@@ -8,7 +8,7 @@
 #include"PlayerStateMachine/NormalState.h"
 PlayerBehavior::PlayerBehavior()
 {
-	m_MaxSpeed =4.0f;
+	m_MaxSpeed =8.0f;
 	m_PlayerState = NormalState::Instance(); 
 	 
 }
@@ -47,8 +47,8 @@ void PlayerBehavior::update(float deltaTime)
 	//	this->m_Parent->getTransform()->setTranslation(m_Parent->getTransform()->translation + translate);
 	//}
 
-	this->m_Parent->move(vec3(translate.x,0,translate.z));
-	//this->m_Parent->getTransform()->move(translate);
+	//this->m_Parent->move(vec3(translate.x,0,translate.z));
+	this->m_Parent->getTransform()->move(translate);
 }
 
 void PlayerBehavior::changeState(PlayerState * newState)

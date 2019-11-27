@@ -90,13 +90,14 @@ void TestGame::init()
 	//castle
 	GameObject* castleObject = new GameObject();
 	Mesh* house = new Mesh("Models/medieval house.obj");
-	PhysicsObject* housePhysicsObject = new PhysicsObject(new AABBCollider(house->getColliderData().m_MinExtents, house->getColliderData().m_MaxExtents) , 1.0f, 0.0f,true);
+	PhysicsObject* housePhysicsObject = new PhysicsObject(new AABBCollider(house->getColliderData().m_MinExtents, house->getColliderData().m_MaxExtents) , 100.0f, 0.0f,true);
 	castleObject->addComponent(new MeshRenderer(house,true));
 	//castleObject->getTransform()->setScale(vec3(0.2f, 0.2f, 0.2f));
 	//castleObject->getTransform()->setRotation(quaternion(0.7f, 0.7f, 0.7f, 0.7f));
 	//castleObject->getTransform()->setTranslation(vec3(0, 0.5F, 0.0F)); 
+	BallBehavior* houseBehaviour = new BallBehavior(); 
+	castleObject->addComponent(houseBehaviour); 
 	castleObject->addComponent(housePhysicsObject); 
-	
 	//street1->getTransform()->setScale(0.02f, 0.02f, 0.02f);
 	//street1->getTransform()->setScale(5.0f, 0.0f, 5.0f);
 	worldObject->addChild(castleObject);
@@ -120,9 +121,11 @@ void TestGame::init()
 		auto* ballObject = new GameObject("Ball"); 
 	auto* ballMeshRenderer = new MeshRenderer(new Mesh("Models/Car_Tractor_01.obj"),true); 
 	auto* ballPhysicsObject = new PhysicsObject(new SphereCollider(vec3(-500.0F, 11.0F, 5.F), 1.0F), 10.0F, 0.0F,true);
-	//ballObject->getTransform()->setTranslation( vec3(5.0F, 2.F, 5.0F)); 
 	ballObject->getTransform()->setScale( vec3(0.02f, 0.02f, 0.02f)); 
-	ballObject->getTransform()->setTranslation( vec3(5.0F, 11.F, 5.0F)); 
+	ballObject->getTransform()->setRotation(quaternion(0, 0, 0.7071068, 0.7071068));
+	ballObject->getTransform()->setTranslation( vec3(5.0F, 2.F, 5.0F)); 
+	
+	//ballObject->getTransform()->setTranslation( vec3(5.0F, 11.F, 5.0F)); 
 	//ballPhysicsObject->addForce(vec3(-1.0f, -9.8f, 0.0f)); 
 	//SteeringBehavior* steeringBehavior = new SteeringBehavior(*this);
 	ballPhysicsObject->m_UseGravity = true; 
@@ -130,9 +133,9 @@ void TestGame::init()
 	//steeringBehavior->addToList(vec3(5, 0, 0));
 	//steeringBehavior->addToList(vec3(0, 0, 5));
 	//steeringBehavior->addToList(vec3(5, 0, 5));
-	auto* ballBehavior = new BallBehavior(); 
+	//auto* ballBehavior = new BallBehavior(); 
 
-	ballObject->addComponent(ballBehavior); 
+	//ballObject->addComponent(ballBehavior); 
 	ballObject->addComponent(ballPhysicsObject); 
 	//ballObject->addComponent(steeringBehavior); 
 	ballObject->addComponent(ballMeshRenderer); 
@@ -169,7 +172,7 @@ void TestGame::init()
 	playerObject->addComponent(camera);
 	playerObject->getTransform()->setTranslation(vec3(10.0f,2.0f, 0.0f)); 
 	PhysicsObject* playerPhysicsObject = new PhysicsObject(new SphereCollider(vec3(10.0f, 0.0f, 0.0f),0.2f),100.0f, vec3(0,0,0),true); 
-	playerObject->addComponent(playerPhysicsObject); 
+	//playerObject->addComponent(playerPhysicsObject); 
 	playerObject->addComponent(playerBehavior);
 	playerObject->setName("Player");
 	worldObject->addChild(playerObject);

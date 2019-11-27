@@ -186,6 +186,12 @@ namespace Paradox {
 
 		}
 
+		void AABBCollider::transform(const vec3& translation)
+		{
+			m_MinBounds += translation; 
+			m_MaxBounds+= translation; 
+		}
+
 
 
 		}

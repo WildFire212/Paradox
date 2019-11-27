@@ -45,6 +45,9 @@ public:
 	inline const vec3 getMaxBounds() const {
 		return m_MaxBounds; 
 	}
+
+	//overrided
+	void transform(const vec3& translation)	override; 
 	
 };
 

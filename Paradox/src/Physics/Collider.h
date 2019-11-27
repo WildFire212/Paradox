@@ -39,7 +39,7 @@ public:
 	 auto Intersect(const Collider& other) -> IntersectData;
 	
 
-	virtual void transform(const vec3& translation) {}
+	 virtual void transform(const vec3& translation) {}
 
 	inline auto getType() const -> const ColliderType& {
 		return m_ColliderType; 

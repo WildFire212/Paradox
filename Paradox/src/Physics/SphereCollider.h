@@ -21,7 +21,9 @@ public:
 	void setCenter(maths::vec3 center); 
 	void setCenter(float x, float y , float z); 
 
+	//overrided 
 	void transform(const vec3& translation) override;
+	
 	//getters
 	const float getRadius() const ; 
 	 auto getCenter()  const -> const vec3 override;
