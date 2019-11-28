@@ -11,6 +11,8 @@ class AABBCollider : public Collider
 private: 
 	vec3 m_MaxBounds; 
 	vec3 m_MinBounds; 
+	vec3 m_tempMinBounds; 
+	vec3 m_tempMaxBounds; 
 	enum Direction {
 	//	UP, 
 	//	DOWN,
@@ -47,7 +49,7 @@ public:
 	}
 
 	//overrided
-	void transform(const vec3& translation)	override; 
+	void transform(const vec3& translation,const vec3& scaling)	override; 
 	
 };
 

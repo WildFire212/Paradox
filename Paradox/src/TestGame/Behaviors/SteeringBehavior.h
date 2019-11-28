@@ -10,7 +10,6 @@ public :
 	vec3 m_Heading;
 	vec3 m_Forward; 
 	float m_DistanceToSearch; 
-	bool playerFound; 
 	
 private: 
 	Scene& m_Scene; 

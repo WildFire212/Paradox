@@ -4,7 +4,7 @@
 namespace Paradox {
 	namespace component {
 
-		PhysicsObject::PhysicsObject(Collider * collider, float mass, vec3 velocity,bool isGravity):
+		PhysicsObject::PhysicsObject(Collider* collider, float mass, vec3 velocity, bool isGravity) :
 			m_Collider(collider),
 			m_Position(collider->getCenter()),
 			m_OldPosition(collider->getCenter()),
@@ -69,6 +69,16 @@ namespace Paradox {
 			m_CurrAcceleration = 0.0f;
 			m_CurrUseGravity = true;
 			
+		}
+		auto PhysicsObject::getCollider() -> Collider&
+		{
+			{
+				vec3 translation = m_Position - m_OldPosition;
+				m_OldPosition = m_Position;
+				vec3 scaling = m_Parent->getTransform()->getScale();
+				m_Collider->transform(translation, scaling);
+				return *m_Collider;
+			}
 		}
 		void PhysicsObject::setVelocity(vec3 velocity)
 		{

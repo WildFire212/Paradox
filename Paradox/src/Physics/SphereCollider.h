@@ -10,6 +10,7 @@ class SphereCollider : public Collider
 private: 
 	vec3 m_Center;  
 	float m_Radius; 
+	float m_tempRad; 
 public:
 
 	SphereCollider(vec3 center, float radius); 
@@ -22,7 +23,7 @@ public:
 	void setCenter(float x, float y , float z); 
 
 	//overrided 
-	void transform(const vec3& translation) override;
+	void transform(const vec3& translation,const vec3& scaling) override;
 	
 	//getters
 	const float getRadius() const ; 

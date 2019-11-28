@@ -37,6 +37,7 @@ IntersectData SphereCollider::intersectSphereCollider(const SphereCollider & oth
 void SphereCollider::setRadius(float radius)
 {
 	m_Radius = radius; 
+	m_tempRad = radius; 
 }
 void SphereCollider::setCenter(maths::vec3 center)
 {
@@ -48,9 +49,11 @@ void SphereCollider::setCenter(float x, float y, float z)
 	m_Center.y = y;
 	m_Center.z = z;
 }
-void SphereCollider::transform(const vec3 & translation)
+void SphereCollider::transform(const vec3 & translation,const vec3& scaling)
 {
 	m_Center += translation;	
+	//m_Radius = m_tempRad*scaling.x; 
+
 }
 const float SphereCollider::getRadius()  const
 {

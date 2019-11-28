@@ -76,6 +76,12 @@ namespace Paradox {
 		return translation; 
 	}
 
+	 auto Transform::getScale()  -> const maths::vec3
+	{
+		return scale;
+
+	}
+
  void Transform::setTranslation(maths::vec3 translation)
 {
 	 this->translation = translation; 

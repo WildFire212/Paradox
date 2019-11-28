@@ -6,8 +6,7 @@ SteeringBehavior::SteeringBehavior(Scene& scene) :
 	m_Velocity(0.f, 0.f, 0.f),
 	m_Heading(0.0f, 0.f, 0.f),
 	m_Forward(0, 0, 0),
-	m_DistanceToSearch(13.0f),
-	playerFound(false)
+	m_DistanceToSearch(13.0f)
 {
 	m_WayPoints.push_back(vec3(-1000,-1000,-1000));
 
@@ -23,19 +22,38 @@ void SteeringBehavior::update(float deltaTime)
 {
 	//m_Velocity = Pursuit(m_Scene.findObject("Ball")->getTransform()->getTranslation(),4.0f);
 	vec3 playerPosition = m_Scene.findObject("Player")->getTransform()->getTranslation();
+	static int coolDownSearch = 0; 
+	
+	
+		//if coolDown = 0 : time to search
+		if (coolDownSearch == 0)
+		{
+			if (searchPlayer(vec2(playerPosition.x, playerPosition.z)))
+			{
+				coolDownSearch++;	//if found then stop searching 
 
-		playerFound = searchPlayer(vec2(playerPosition.x, playerPosition.z));
-	if (playerFound)
-	{
-		m_Velocity = Pursuit(playerPosition, 4.0f);
-		
-	}
-	else {
-		m_Velocity = followPath(); 
-	}
+			}
+			
+			else{
+			m_Velocity = followPath();	//if not found then keep following path
+			}
+		}
+		//if coolDown !=0 : time to chase player 
+		else if (coolDownSearch != 0)
+		{
+			coolDownSearch++; 
+			m_Velocity = Pursuit(playerPosition, 4.0f);		//chase player 
+			if (coolDownSearch > 1000)
+			{
+				coolDownSearch = 0 ;			//if coolDown done again search 
 
+			}
+		}
+	
+	
 	getTransform()->move (vec3(m_Velocity.x* deltaTime,0.0f , m_Velocity.z * deltaTime));
 	//getTransform()->move (vec3(m_Velocity.x* deltaTime,0.0f , m_Velocity.y * deltaTime));
+	
 }
 
 void SteeringBehavior::addToList(vec3 wayPoint)
@@ -95,6 +113,7 @@ vec3 SteeringBehavior::followPath()
 
 vec3 SteeringBehavior::Pursuit(vec3 TargetPosition, float speed)
 {
+	
 	//consider evader	
 	vec3 toEvader = TargetPosition - getTransform()->getTranslation();
 	m_Forward = toEvader; 

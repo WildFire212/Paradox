@@ -118,9 +118,10 @@ void TestGame::init()
 
 //characterrs
 	//ball 1
-		auto* ballObject = new GameObject("Ball"); 
-	auto* ballMeshRenderer = new MeshRenderer(new Mesh("Models/Car_Tractor_01.obj"),true); 
-	auto* ballPhysicsObject = new PhysicsObject(new SphereCollider(vec3(-500.0F, 11.0F, 5.F), 1.0F), 10.0F, 0.0F,true);
+		auto* ballObject = new GameObject("Ball");
+		auto* tractorMesh = new Mesh("Models/Car_Tractor_01.obj"); 
+	auto* ballMeshRenderer = new MeshRenderer(tractorMesh,true);
+	auto* ballPhysicsObject = new PhysicsObject(new SphereCollider(vec3(-500.0F, 11.0F, 5.F), 1.0F), 10.0F, 0.0F, true);
 	ballObject->getTransform()->setScale( vec3(0.02f, 0.02f, 0.02f)); 
 	ballObject->getTransform()->setRotation(quaternion(0, 0, 0.7071068, 0.7071068));
 	ballObject->getTransform()->setTranslation( vec3(5.0F, 2.F, 5.0F)); 
@@ -172,7 +173,7 @@ void TestGame::init()
 	playerObject->addComponent(camera);
 	playerObject->getTransform()->setTranslation(vec3(10.0f,2.0f, 0.0f)); 
 	PhysicsObject* playerPhysicsObject = new PhysicsObject(new SphereCollider(vec3(10.0f, 0.0f, 0.0f),0.2f),100.0f, vec3(0,0,0),true); 
-	//playerObject->addComponent(playerPhysicsObject); 
+	playerObject->addComponent(playerPhysicsObject); 
 	playerObject->addComponent(playerBehavior);
 	playerObject->setName("Player");
 	worldObject->addChild(playerObject);
