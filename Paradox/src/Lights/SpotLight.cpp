@@ -4,12 +4,13 @@ namespace Paradox {
 	{
 
 		SpotLight::SpotLight(GLfloat red, GLfloat green, GLfloat blue,
-			GLfloat aIntensity, GLfloat dIntensity, glm::vec3 pos,
-			glm::vec3 dir,
+			GLfloat aIntensity, GLfloat dIntensity, maths::vec3 pos,
+			maths::vec3 dir,
 			GLfloat con, GLfloat lin, GLfloat exp,
 			GLfloat edg) : PointLight(red, green, blue, aIntensity, dIntensity, pos, con, lin, exp)
 		{
-			direction = normalize(dir);
+			dir.normalize();
+			direction = dir;
 
 			edge = edg;
 			procEdge = cosf(glm::radians(edge));
@@ -45,7 +46,7 @@ namespace Paradox {
 			shader->getSpotLightLocation().lin, shader->getSpotLightLocation().exp, shader->getSpotLightLocation().edge);
 		}
 
-		void SpotLight::SetFlash(glm::vec3 pos, glm::vec3 dir)
+		void SpotLight::SetFlash(maths::vec3 pos, maths::vec3 dir)
 		{
 			position = pos;
 			direction = dir;

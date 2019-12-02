@@ -13,8 +13,8 @@ namespace Paradox {
 
 			SpotLight(GLfloat red, GLfloat green, GLfloat blue,
 				GLfloat aIntensity, GLfloat dIntensity,
-				glm::vec3 pos,
-				glm::vec3 direction,
+				maths::vec3 pos,
+				maths::vec3 direction,
 				GLfloat con, GLfloat lin, GLfloat exp,
 				GLfloat edg);
 
@@ -23,12 +23,12 @@ namespace Paradox {
 				GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation,
 				GLuint edgeLocation);
 			void renderLight(RenderingEngine& renderingEngine) override;
-			void SetFlash(glm::vec3 pos, glm::vec3 dir);
+			void SetFlash(maths::vec3 pos, maths::vec3 dir);
 
 			~SpotLight();
 
 		private:
-			glm::vec3 direction;
+			maths::vec3 direction;
 
 			GLfloat edge, procEdge;
 		};

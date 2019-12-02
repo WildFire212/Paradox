@@ -8,12 +8,12 @@ namespace Paradox {
 		{
 		public:
 			DirectionalLight();
-			DirectionalLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, glm::vec3 dir);
+			DirectionalLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, maths::vec3 dir);
 			void renderLight(RenderingEngine& renderingEngine) override; 
 			void UseLight(GLuint aColorLocation, GLuint aIntensityLocation, GLuint dIntensityLocation, GLuint directionLocation);
 			~DirectionalLight();
 		private:
-			glm::vec3 direction;
+			maths::vec3 direction;
 			
 		};
 

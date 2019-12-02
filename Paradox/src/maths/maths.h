@@ -5,9 +5,9 @@
 #include"vec4.h"
 #include"mat4.h"
 #include"quaternion.h"	
-#include"gtc/matrix_transform.hpp"
-#include"gtc/type_ptr.hpp"
-
+#include<gtc/matrix_transform.hpp>
+#include<gtc/type_ptr.hpp>
+#include<glm.hpp>
 namespace Paradox {
 	namespace maths {
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Paradox", "Paradox\Paradox.vcxproj", "{DBA9F375-6E6E-4A29-846B-45A09495F427}"
 EndProject
@@ -10,10 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Performance2.psess = Performance2.psess
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGame", "TestGame\TestGame.vcxproj", "{2CB8828C-999A-4C66-A799-C72A88B5F6BD}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -21,20 +20,31 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Debug|x64.ActiveCfg = Debug|x64
-		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Debug|x64.Build.0 = Debug|x64
+		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Debug|x64.ActiveCfg = Debug|Win32
+		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Debug|x64.Build.0 = Debug|Win32
 		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Debug|x86.ActiveCfg = Debug|Win32
 		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Debug|x86.Build.0 = Debug|Win32
-		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x64.ActiveCfg = Release|x64
-		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x64.Build.0 = Release|x64
-		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x86.ActiveCfg = Release|Win32
-		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x86.Build.0 = Release|Win32
+		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x64.ActiveCfg = Debug|Win32
+		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x64.Build.0 = Debug|Win32
+		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x86.ActiveCfg = Debug|Win32
+		{DBA9F375-6E6E-4A29-846B-45A09495F427}.Release|x86.Build.0 = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Debug|x64.ActiveCfg = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Debug|x64.Build.0 = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Debug|x86.Build.0 = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Release|x64.ActiveCfg = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Release|x64.Build.0 = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Release|x86.ActiveCfg = Debug|Win32
+		{2CB8828C-999A-4C66-A799-C72A88B5F6BD}.Release|x86.Build.0 = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4676EA9B-D2F4-499B-B5DD-8B251EEC20B6}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

@@ -7,7 +7,7 @@ namespace Paradox {
 		DirectionalLight::DirectionalLight() : Light() {
 
 		}
-		DirectionalLight::DirectionalLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, glm::vec3 dir) : Light(red, green, blue, aIntensity, dIntensity)
+		DirectionalLight::DirectionalLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, maths::vec3 dir) : Light(red, green, blue, aIntensity, dIntensity)
 		{
 			direction = dir;
 			m_Shader = new Shader("src/Shaders/GLSLShaders/DirectLightShader.vert","src/Shaders/GLSLShaders/DirectLightShader.frag" ); 

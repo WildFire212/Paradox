@@ -1,0 +1,19 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 07.05.2018 08:20:13
+
+newmtl Tractor_Red
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\HP\Desktop\fornite packs\UmodelExport\Vehicles\FORT_Vehicles_01\Materials\Car_Tractor_01_D.tga
+	map_Kd C:\Users\HP\Desktop\fornite packs\UmodelExport\Vehicles\FORT_Vehicles_01\Materials\Car_Tractor_01_D.tga
+	map_Ks C:\Users\HP\Desktop\fornite packs\UmodelExport\Vehicles\FORT_Vehicles_01\Materials\Car_Tractor_01_S.tga
+	map_Ke C:\Users\HP\Desktop\fornite packs\UmodelExport\Vehicles\FORT_Vehicles_01\Materials\Car_Tractor_01_E.tga
+	map_bump C__Users_HP_Desktop_fornite_packs_UmodelExport_Vehicles_FORT_Vehicles_01_Materials_Car_Tractor_01_N_tga_Normal_Bump.tga

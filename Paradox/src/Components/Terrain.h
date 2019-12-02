@@ -1,5 +1,5 @@
 #pragma once
-#include"../../src/graphics/Texture.h"
+#include"../graphics/Texture.h"
 #include<string>
 #include"MeshRenderer.h"
 #include"../Components/Component.h"

@@ -1,5 +1,5 @@
 #include "Transform.h"
-#include"../../src/core/GameObject.h"
+#include"../core/GameObject.h"
 using namespace Paradox::maths; 
 namespace Paradox {
 	Transform::Transform() :

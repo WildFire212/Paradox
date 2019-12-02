@@ -1,7 +1,7 @@
 #pragma once
 #include<map>
 #include<string>
-#include"../../maths/maths.h"
+#include"../maths/maths.h"
 #include<GL/glew.h>
 namespace Paradox {
 	namespace graphics {

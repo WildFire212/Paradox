@@ -6,7 +6,7 @@ namespace Paradox {
 
 		PointLight::PointLight(GLfloat red, GLfloat green, GLfloat blue,
 			GLfloat aIntensity, GLfloat dIntensity,
-			glm::vec3 pos, GLfloat cons, GLfloat lin, GLfloat exp) : Light(red, green, blue, aIntensity, dIntensity)
+			maths::vec3 pos, GLfloat cons, GLfloat lin, GLfloat exp) : Light(red, green, blue, aIntensity, dIntensity)
 		{
 			position = pos;
 			exponent = exp;

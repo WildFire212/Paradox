@@ -1,7 +1,7 @@
 #pragma once
 #include"Component.h"
-#include"../core/Input.h"
-#include"../core/GameObject.h"
+#include"core/Input.h"
+#include"core/GameObject.h"
 
 using namespace Paradox::core; 
 namespace Paradox {
