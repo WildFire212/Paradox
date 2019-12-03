@@ -83,38 +83,19 @@ void TestGame::init()
 	addObject(floorObject); 
 	
 
-	//terrain 
-	/*auto* terrainObject = new GameObject("Terrain");
-	auto* terrain = new Terrain(0, 0, new Texture("Textures/Grass.jpg"), "Textures/Heightmap.png"); 
-	auto* terrainCollider = new TerrainCollider(*terrain); 
-	auto* terrainPhysicsObject = new PhysicsObject(terrainCollider, 1.0F, 0.0F, false);
-	terrainObject->addComponent(terrainPhysicsObject); 
-	terrainObject->addComponent(terrain);
-	
-	addObject(terrainObject);*/
 		
 	//world 
 	GameObject* worldObject= new GameObject("World"); 
-	
 	//castle
-	GameObject* castleObject = new GameObject();
+	auto* zombieMesh = new Mesh("Models/8Ball.fbx");
+	GameObject* castleObject = new GameObject("House");
 	Mesh* house = new Mesh("Models/medieval house.obj");
 	PhysicsObject* housePhysicsObject = new PhysicsObject(new AABBCollider(house->getColliderData().m_MinExtents, house->getColliderData().m_MaxExtents) , 100.0f, 0.0f,true);
+	castleObject->getTransform()->setTranslation(vec3(-15.0f,3.0f,-5.0f));
 	castleObject->addComponent(new MeshRenderer(house,true));
-	//castleObject->getTransform()->setScale(vec3(0.2f, 0.2f, 0.2f));
-	//castleObject->getTransform()->setRotation(quaternion(0.7f, 0.7f, 0.7f, 0.7f));
-	//castleObject->getTransform()->setTranslation(vec3(0, 0.5F, 0.0F)); 
-
-	castleObject->addComponent(housePhysicsObject); 
-	//street1->getTransform()->setScale(0.02f, 0.02f, 0.02f);
-	//street1->getTransform()->setScale(5.0f, 0.0f, 5.0f);
+	//castleObject->addComponent(housePhysicsObject); 
 	worldObject->addChild(castleObject);
 	
-	//GameObject* street2 = new GameObject();
-	//street2->addComponent(new MeshRenderer(street));
-	//street2->getTransform()->setScale(5.0f, 0.0f, 5.0f);
-	//street2->getTransform()->setTranslation(0.0f, 10.0f, 0.0f);
-	//worldObject->addChild(street2);
 
 	//animated model 
 	auto* animatedManObject = new GameObject(); 
@@ -124,52 +105,91 @@ void TestGame::init()
 	//worldObject->addChild(animatedManObject); 
 
 
-//characterrs
-	//ball 1
-		auto* ballObject = new GameObject("Ball");
-		auto* tractorMesh = new Mesh("Models/Car_Tractor_01.obj"); 
-	auto* ballMeshRenderer = new MeshRenderer(tractorMesh,true);
-	auto* ballPhysicsObject = new PhysicsObject(new SphereCollider(vec3(-500.0F, 11.0F, 5.F), 1.0F), 10.0F, 0.0F, true);
-	ballObject->getTransform()->setScale( vec3(0.02f, 0.02f, 0.02f)); 
-	ballObject->getTransform()->setRotation(quaternion(0, 0, 0.7071068, 0.7071068));
-	ballObject->getTransform()->setTranslation( vec3(5.0F, 2.F, 5.0F)); 
+	//characters
+
+	//zombie 1
+	auto* zombieObject1 = new GameObject();
+	//auto* zombieMesh = new Mesh("Models/8Ball.fbx"); 
+	auto* zombieMeshRenderer = new MeshRenderer(zombieMesh,true);
+	auto* zombiePhysicsObject = new PhysicsObject(new SphereCollider(zombieMesh->getColliderData().m_Center, zombieMesh->getColliderData().m_Radius), 10.0F, 0.0F, true);
+	zombieObject1->getTransform()->setTranslation(vec3(25.f, 3.f, 25.0f));
 	
-	//ballObject->getTransform()->setTranslation( vec3(5.0F, 11.F, 5.0F)); 
-	//ballPhysicsObject->addForce(vec3(-1.0f, -9.8f, 0.0f)); 
-	//SteeringBehavior* steeringBehavior = new SteeringBehavior(*this);
-	ballPhysicsObject->m_UseGravity = true; 
-	//steeringBehavior->addToList(vec3(0, 5, 0));
-	//steeringBehavior->addToList(vec3(5, 0, 0));
-	//steeringBehavior->addToList(vec3(0, 0, 5));
-	//steeringBehavior->addToList(vec3(5, 0, 5));
-	//auto* ballBehavior = new BallBehavior(); 
+	SteeringBehavior* zombieBehavior1 = new SteeringBehavior(*this);
+	zombieBehavior1->m_MaxSpeed = 20.0f; 
+	zombieBehavior1->addToList(vec3(25, 0, -25));
+	zombieBehavior1->addToList(vec3(-10, 0, -25));
+	zombieBehavior1->addToList(vec3(25, 0, -25));
+	zombieBehavior1->addToList(vec3(25, 0, 25)); 
+	zombieObject1->addComponent(zombieBehavior1);
+	zombieObject1->addComponent(zombiePhysicsObject);
+	zombieObject1->addComponent(zombieMeshRenderer);
+	zombieObject1->setName("Zombie1");
+	addObject(zombieObject1);
 
-	//ballObject->addComponent(ballBehavior); 
-	ballObject->addComponent(ballPhysicsObject); 
-	//ballObject->addComponent(steeringBehavior); 
-	ballObject->addComponent(ballMeshRenderer); 
-	ballObject->setName("Ball");
-	addObject(ballObject); 
+	//zombie 2
+	auto* zombieObject2 = new GameObject();
+	//auto* zombieMesh = new Mesh("Models/8Ball.fbx"); 
+	auto* zombieMeshRenderer2 = new MeshRenderer(zombieMesh,true);
+	auto* zombiePhysicsObject2 = new PhysicsObject(new SphereCollider(zombieMesh->getColliderData().m_Center, zombieMesh->getColliderData().m_Radius), 10.0F, 0.0F, true);
+	zombieObject2->getTransform()->setTranslation(vec3(-20.f, 3.f, -20.0f));
+
+	SteeringBehavior* zombieBehavior2 = new SteeringBehavior(*this);
+	zombieBehavior2->m_MaxSpeed = 20.0f;
+	zombieBehavior2->addToList(vec3(-5, 0, -20));
+	zombieBehavior2->addToList(vec3(-5, 0, 0));
+	zombieBehavior2->addToList(vec3(-20, 0, 0));
+	zombieBehavior2->addToList(vec3(-20, 0, -20));
+	zombieObject2->addComponent(zombieBehavior2);
+	zombieObject2->addComponent(zombiePhysicsObject2);
+	zombieObject2->addComponent(zombieMeshRenderer2);
+	zombieObject2->setName("Zombie2");
+	addObject(zombieObject2);
+
+	
+	//zombie 3
+	auto* zombieObject3 = new GameObject();
+	//auto* zombieMesh = new Mesh("Models/8Ball.fbx"); 
+	auto* zombieMeshRenderer3 = new MeshRenderer(zombieMesh,true);
+	auto* zombiePhysicsObject3 = new PhysicsObject(new SphereCollider(zombieMesh->getColliderData().m_Center, zombieMesh->getColliderData().m_Radius), 10.0F, 0.0F, true);
+	zombieObject3->getTransform()->setTranslation(vec3(20.f, 3.f, -20.0f));
+
+	SteeringBehavior* zombieBehavior3 = new SteeringBehavior(*this);
+	zombieBehavior3->m_MaxSpeed = 20.0f;
+	zombieBehavior3->addToList(vec3(20, 0, 15));
+	zombieBehavior3->addToList(vec3(5, 0, 15));
+	zombieBehavior3->addToList(vec3(5, 0, 0));
+	zombieBehavior3->addToList(vec3(15, 0,0));
+	zombieBehavior3->addToList(vec3(15, 0,-20));
+	zombieBehavior3->addToList(vec3(20, 0,-20));
+	zombieObject3->addComponent(zombieBehavior3);
+	zombieObject3->addComponent(zombiePhysicsObject3);
+	zombieObject3->addComponent(zombieMeshRenderer3);
+	zombieObject3->setName("Zombie3");
+	addObject(zombieObject3);
+
+	
+	//zombie 4
+	auto* zombieObject4 = new GameObject();
+	//auto* zombieMesh = new Mesh("Models/8Ball.fbx"); 
+	auto* zombieMeshRenderer4 = new MeshRenderer(zombieMesh,true);
+	auto* zombiePhysicsObject4 = new PhysicsObject(new SphereCollider(zombieMesh->getColliderData().m_Center, zombieMesh->getColliderData().m_Radius), 10.0F, 0.0F, true);
+	zombieObject4->getTransform()->setTranslation(vec3(-20.f, 3.f, 20.0f));
+
+	SteeringBehavior* zombieBehavior4 = new SteeringBehavior(*this);
+	zombieBehavior4->m_MaxSpeed = 20.0f;
+	zombieBehavior4->addToList(vec3(-25, 0, 20));
+	zombieBehavior4->addToList(vec3(-25, 0, 5));
+	zombieBehavior4->addToList(vec3(-10, 0, 5));
+	zombieBehavior4->addToList(vec3(-10, 0, 20));
+	zombieBehavior4->addToList(vec3(-20, 0, 20));
+	zombieObject4->addComponent(zombieBehavior4);
+	zombieObject4->addComponent(zombiePhysicsObject4);
+	zombieObject4->addComponent(zombieMeshRenderer4);
+	zombieObject4->setName("Zombie4");
+	addObject(zombieObject4);
+
 	
 
-	//ball 2 
-	GameObject* ballObject2 = new GameObject(); 
-	MeshRenderer* ballMeshRenderer2= new MeshRenderer(new Mesh("Models/8Ball.fbx"),true); 
-	PhysicsObject* ballPhysicsObject2 = new PhysicsObject(new SphereCollider(vec3(5.0F, 4.0F, 5.F), 1.0f), 100.0f,0.0f,true);
-	ballObject2->getTransform()->setTranslation(vec3(5.0F, 3.0f, 0.0F));
-	//ballObject2->getTransform()->setScale(vec3(0.02f, 0.02f, 0.02f));
-	//ballObject2->getTransform()->setTranslation(vec3(5.0F, 11.F, 5.0F));
-	SteeringBehavior* steering = new SteeringBehavior(*this); 
-	steering->m_MaxSpeed = 5.0f; 
-	steering->addToList(vec3(20, 0, -20.0f));
-	steering->addToList(vec3(-20, 0, 20.0f));
-	steering->addToList(vec3(-20.0f, 0, -20.0f));
-	steering->addToList(vec3(20.0f, 0, 20.0f));
-
-	ballObject2->addComponent(ballPhysicsObject2); 
-	ballObject2->addComponent(steering); 
-	ballObject2->addComponent(ballMeshRenderer2); 
-	worldObject->addChild(ballObject2); 
 
 	
 	//player
@@ -181,7 +201,7 @@ void TestGame::init()
 	playerObject->addComponent(camera);
 	playerObject->getTransform()->setTranslation(vec3(10.0f,2.0f, 0.0f)); 
 	PhysicsObject* playerPhysicsObject = new PhysicsObject(new SphereCollider(vec3(10.0f, 0.0f, 0.0f),0.2f),100.0f, vec3(0,0,0),true); 
-	playerObject->addComponent(playerPhysicsObject); 
+	//playerObject->addComponent(playerPhysicsObject); 
 	playerObject->addComponent(playerBehavior);
 	playerObject->setName("Player");
 	worldObject->addChild(playerObject);

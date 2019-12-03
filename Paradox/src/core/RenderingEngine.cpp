@@ -87,7 +87,7 @@ namespace Paradox {
 			m_GBuffer = new GBuffer(width, height);
 			m_ActiveLight = new Light(); 
 			m_MainCamera = new Camera(); 
-			glClearColor(0.0, 0.0f, 0.0f, 0.0f);
+			glClearColor(1.0, 1.0f,1.0f, 1.0f);
 			//glFrontFace(GL_CW);
 			//glCullFace(GL_BACK); 
 			//glEnable(GL_CULL_FACE); 

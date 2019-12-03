@@ -26,7 +26,7 @@ void SteeringBehavior::update(float deltaTime)
 	
 	
 		//if coolDown = 0 : time to search
-		if (coolDownSearch == 0)
+		/*if (coolDownSearch == 0)
 		{
 			if (searchPlayer(vec2(playerPosition.x, playerPosition.z)))
 			{
@@ -48,9 +48,9 @@ void SteeringBehavior::update(float deltaTime)
 				coolDownSearch = 0 ;			//if coolDown done again search 
 
 			}
-		}
+		}*/
 	
-	
+		m_Velocity = followPath();
 	getTransform()->move (vec3(m_Velocity.x* deltaTime,0.0f , m_Velocity.z * deltaTime));
 	//getTransform()->move (vec3(m_Velocity.x* deltaTime,0.0f , m_Velocity.y * deltaTime));
 	

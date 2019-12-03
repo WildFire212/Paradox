@@ -71,7 +71,7 @@ namespace Paradox {
 		{
 			//default controllable 
 			this->position = this->m_Parent->getTransform()->getTranslation();
-			std::cout << this->m_Parent->getTransform()->getTranslation().y << std::endl;
+			//std::cout << this->m_Parent->getTransform()->getTranslation().y << std::endl;
 		//std::cout << pitch << "  " << yaw<< std::endl;
 			this->mouseControl(graphics::Window::getChangeX(), graphics::Window::getChangeY());
 			//this->keysControl(graphics::Window::m_Keys);
