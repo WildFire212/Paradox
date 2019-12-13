@@ -2,7 +2,7 @@
 
 #include"../maths/maths.h"
 #include"SphereCollider.h"
-
+#include"AABBCollider.h"
 using namespace Paradox::maths; 
 namespace Paradox {
 	namespace physics {
@@ -22,6 +22,7 @@ public:
 	void normalize(); 
 
 	auto intersectSphereCollider(const SphereCollider& sphereCollider) -> IntersectData;
+	auto intersectAABBCollider(const AABBCollider& aabbCollider)->IntersectData; 
 	//getters 
 	inline auto getNormal() const -> const vec3 {
 		return m_Normal; 

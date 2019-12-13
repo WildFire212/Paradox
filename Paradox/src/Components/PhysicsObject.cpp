@@ -68,7 +68,7 @@ namespace Paradox {
 			this->m_Parent->getTransform()->setTranslation(getPosition());
 			m_CurrAcceleration = 0.0f;
 			m_CurrUseGravity = true;
-			
+		
 		}
 		auto PhysicsObject::getCollider() -> Collider&
 		{

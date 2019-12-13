@@ -33,6 +33,11 @@ namespace Paradox {
 			AABBCollider* thisAABBCollider = (AABBCollider*)(this);
 			return thisAABBCollider->intersectSphereCollider((SphereCollider&)other);
 		}
+		if (this->getType() == TYPE_PLANE && other.getType() == TYPE_AABB)
+		{
+			PlaneCollider* thisPlaneCollider = (PlaneCollider*)(this);
+			return thisPlaneCollider->intersectAABBCollider((AABBCollider&)other);
+		}
 		else {
 			throw std::runtime_error(" NO TEST FOR GIVEN COLLIDER TYPES :"+std::to_string(this->getType())+" and "+std::to_string(other.getType()));
 		}

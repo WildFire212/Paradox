@@ -29,6 +29,7 @@ namespace Paradox {
 					if (intersectData.getdoesIntersect())
 					{
 
+						//plane and sphere
 						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_PLANE && m_PhysicsObjects[j]->getCollider().getType() == Collider::TYPE_SPHERE)
 						{
 							
@@ -42,10 +43,7 @@ namespace Paradox {
 							r2.normalize(); 
 							vec3 currVelocity = m_PhysicsObjects[j]->getVelocity() - reflected; //(reflected - r2 * 5.0f) ;
 							float friction =0.0f; 
-							if (prevVelocity.x != 0.0f || prevVelocity.z != 0.0f)
-							{
-								friction =0.4 * m_PhysicsObjects[j]->getMass() *0.098f;
-							}
+							
 							m_PhysicsObjects[j]->setVelocity(m_PhysicsObjects[j]->getVelocity() - (reflected - reflected * 0.2f));
 						
 
@@ -62,6 +60,16 @@ namespace Paradox {
 								m_PhysicsObjects[i]->setVelocity(m_PhysicsObjects[i]->getVelocity() - reflected);
 						}
 
+					    //plane and aabb
+						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_PLANE && m_PhysicsObjects[j]->getCollider().getType() == Collider::TYPE_AABB)
+						{
+							vec3 min = (static_cast<AABBCollider*>(&m_PhysicsObjects[j]->getCollider()))->getMinBounds(); 
+							
+						
+								m_PhysicsObjects[j]->m_CurrUseGravity = false;
+							 
+							m_PhysicsObjects[j]->getTransform()->move(vec3(0, intersectData.getDistance(), 0));
+						}
 						//terrain and sphere detection collision
 						if (m_PhysicsObjects[i]->getCollider().getType() == Collider::TYPE_TERRAIN
 							&&

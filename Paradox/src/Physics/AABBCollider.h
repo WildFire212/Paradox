@@ -13,6 +13,7 @@ private:
 	vec3 m_MinBounds; 
 	vec3 m_tempMinBounds; 
 	vec3 m_tempMaxBounds; 
+
 	enum Direction {
 	//	UP, 
 	//	DOWN,

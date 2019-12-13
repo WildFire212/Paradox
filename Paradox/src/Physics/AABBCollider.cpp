@@ -16,7 +16,7 @@ namespace Paradox {
 			m_MinBounds = minBounds;
 			m_tempMaxBounds= maxBounds;
 			m_tempMinBounds= minBounds;
-
+			m_Translation = vec3(0, 0, 0); 
 			m_Directions = new vec3[4]{
 				//vec3(0,1.0f,0.0f),
 				//vec3(0,-1.0f,0.0f),
@@ -191,11 +191,12 @@ namespace Paradox {
 
 		void AABBCollider::transform(const vec3& translation,const vec3& scaling)
 		{
-			//m_MinBounds = m_tempMinBounds * scaling; 
-			//m_MaxBounds =m_tempMaxBounds / scaling; 
-
-			m_MinBounds += translation; 
-			m_MaxBounds+= translation; 
+			m_Scale = scaling; 
+			m_Translation += translation; 
+			//m_MinBounds = m_MinBounds   + translation;
+			//m_MaxBounds = m_MaxBounds   + translation;
+			m_MinBounds = m_tempMinBounds * m_Scale + m_Translation; 
+			m_MaxBounds= m_tempMaxBounds* m_Scale + m_Translation;
 		}
 
 

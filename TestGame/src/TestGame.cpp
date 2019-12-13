@@ -91,9 +91,13 @@ void TestGame::init()
 	GameObject* castleObject = new GameObject("House");
 	Mesh* house = new Mesh("Models/medieval house.obj");
 	PhysicsObject* housePhysicsObject = new PhysicsObject(new AABBCollider(house->getColliderData().m_MinExtents, house->getColliderData().m_MaxExtents) , 100.0f, 0.0f,true);
-	castleObject->getTransform()->setTranslation(vec3(-15.0f,3.0f,-5.0f));
+	//PhysicsObject* housePhysicsObject = new PhysicsObject(new SphereCollider(house->getColliderData().m_Center, house->getColliderData().m_Radius) , 100.0f, 0.0f,true);
+	//castleObject->getTransform()->setScale(vec3(2.0f, 2.0f, 2.0f));
+	castleObject->getTransform()->setTranslation(vec3(-15.0f,30.0f,-5.0f));
+	BallBehavior* b = new BallBehavior(); 
+	castleObject->addComponent(b); 
 	castleObject->addComponent(new MeshRenderer(house,true));
-	//castleObject->addComponent(housePhysicsObject); 
+	castleObject->addComponent(housePhysicsObject); 
 	worldObject->addChild(castleObject);
 	
 
@@ -205,7 +209,7 @@ void TestGame::init()
 	playerObject->addComponent(playerBehavior);
 	playerObject->setName("Player");
 	worldObject->addChild(playerObject);
-
+	
 	 
 
 

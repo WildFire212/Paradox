@@ -11,6 +11,7 @@ SphereCollider::SphereCollider(vec3 center, float radius) : Collider(TYPE_SPHERE
 	m_Center = center; 
 	m_Radius = radius;
 	//m_ColliderType = TYPE_SPHERE; 
+	m_tempRad = radius; 
 }
 
 
@@ -53,6 +54,8 @@ void SphereCollider::transform(const vec3 & translation,const vec3& scaling)
 {
 	m_Center += translation;	
 	//m_Radius = m_tempRad*scaling.x; 
+	m_Scale= scaling; 
+	m_Radius = m_tempRad*m_Scale.x; 
 
 }
 const float SphereCollider::getRadius()  const
