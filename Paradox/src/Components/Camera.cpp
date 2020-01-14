@@ -54,6 +54,14 @@ namespace Paradox {
 			return Result;
 		}
 
+		auto Camera::calculateViewMatrixGLM() const -> glm::mat4
+		{
+			glm::mat4 glmResult = glm::lookAt(glm::vec3(position.x, position.y, position.z),
+				glm::vec3(position.x + front.x, position.y + front.y, position.z + front.z),
+				glm::vec3(Up.x, Up.y, Up.z));
+			return glmResult; 
+		}
+
 		void Camera::updateView() {
 			
 			

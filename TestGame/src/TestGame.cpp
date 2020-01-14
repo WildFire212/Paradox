@@ -12,7 +12,7 @@
 #include"Behaviors/BallBehavior.h"
 #include"Behaviors/SteeringBehavior.h"
 #include"graphics/Window.h"
-
+#include"PostEffects/Skybox.h"
 TestGame::TestGame()
 = default;
 
@@ -69,12 +69,13 @@ void TestGame::init()
 			10.0F, 10.0F
 	};
 
-	Texture texture("Textures/grass.jpg");	
-	auto* material = new Material(texture, 0.1F, 0.1F, texture);
+	Texture texture("Textures/DirtyBrick_S.jpg");
+	Texture normalTexture("Textures/DirtyBrick_N.jpg");
+	auto* material = new Material(texture, 0.1F, 0.1F, normalTexture);
 
 	//mesh Renderer
 	Mesh* floorMesh = new Mesh(floorVertices, floorIndices, 12, 6, FloortexCoords, material, floorNormals, false);
-	auto* floorMeshRenderer = new MeshRenderer(floorMesh,true);
+	auto* floorMeshRenderer = new MeshRenderer(floorMesh,false);
 	PhysicsObject* planePhysicsObj = new PhysicsObject(new PlaneCollider(vec3(0.0f, 1.0f, 0.0f),0.0f), 3.0f, 0.0f, false);
 	////add component 
 	floorObject->addComponent(planePhysicsObj);
@@ -86,27 +87,65 @@ void TestGame::init()
 		
 	//world 
 	GameObject* worldObject= new GameObject("World"); 
+	//fence1
+	GameObject* fenceObject = new GameObject("Fence");
+	Mesh* fenceMesh = new Mesh("Models/wooden_fence.fbx");
+	PhysicsObject* fencePhysicsObject = new PhysicsObject(new AABBCollider(fenceMesh->getColliderData().m_MinExtents, fenceMesh->getColliderData().m_MaxExtents), 50.0f, 0.0f, false);
+	fenceObject->getTransform()->setTranslation(vec3(0.19991f,0.9517f,28.8f));
+	fenceObject->getTransform()->setScale(vec3(0.5f, 1.6f,0.5f));
+	fenceObject->getTransform()->setRotation(quaternion(0.f, 0.f, 0.7071068f, 0.7071068f));
+	BallBehavior* b = new BallBehavior();
+	fenceObject->addComponent(b);
+
+	//fenceObject->addComponent(fencePhysicsObject);
+	fenceObject->addComponent(new MeshRenderer(fenceMesh, true));
+	worldObject->addChild(fenceObject);
+	
+	//fence2
+	GameObject* fenceObject2 = new GameObject("Fence2");
+	fenceObject2->getTransform()->setTranslation(vec3(0.19991f,0.9517f,-28.8f));
+	fenceObject2->getTransform()->setScale(vec3(0.5f, 1.6f,0.5f));
+	fenceObject2->getTransform()->setRotation(quaternion(0.f, 0.f, 0.7071068f, 0.7071068f));
+	
+	//fenceObject->addComponent(fencePhysicsObject);
+	fenceObject2->addComponent(new MeshRenderer(fenceMesh, true));
+	worldObject->addChild(fenceObject2);
+	
+	
 	//castle
 	auto* zombieMesh = new Mesh("Models/8Ball.fbx");
 	GameObject* castleObject = new GameObject("House");
+	
 	Mesh* house = new Mesh("Models/medieval house.obj");
 	PhysicsObject* housePhysicsObject = new PhysicsObject(new AABBCollider(house->getColliderData().m_MinExtents, house->getColliderData().m_MaxExtents) , 100.0f, 0.0f,true);
-	//PhysicsObject* housePhysicsObject = new PhysicsObject(new SphereCollider(house->getColliderData().m_Center, house->getColliderData().m_Radius) , 100.0f, 0.0f,true);
-	//castleObject->getTransform()->setScale(vec3(2.0f, 2.0f, 2.0f));
-	castleObject->getTransform()->setTranslation(vec3(-15.0f,30.0f,-5.0f));
-	BallBehavior* b = new BallBehavior(); 
-	castleObject->addComponent(b); 
+	
+	castleObject->getTransform()->setTranslation(vec3(5.00002,0.2258307f ,- 6.8f));
 	castleObject->addComponent(new MeshRenderer(house,true));
 	castleObject->addComponent(housePhysicsObject); 
 	worldObject->addChild(castleObject);
 	
 
-	//animated model 
-	auto* animatedManObject = new GameObject(); 
-	auto * animatedShader = new Shader("src/Shaders/GLSLShaders/GBufferAnimationShader.vert", "src/Shaders/GLSLShaders/GBufferShader.frag");
-	animatedManObject->addComponent(new AnimatedComponent(new AnimatedModel("Models/model.dae"),animatedShader));
+	//tractor 
+	GameObject* tractorObject= new GameObject("Tractor");
+	Mesh* tractorMesh = new Mesh("Models/Car_Tractor_01.obj");
+	//PhysicsObject* tractorPhysicsObject = new PhysicsObject(new AABBCollider(tractorMesh->getColliderData().m_MinExtents, tractorMesh->getColliderData().m_MaxExtents), 50.0f, 0.0f, true);
+	PhysicsObject* tractorPhysicsObject = new PhysicsObject(new SphereCollider(zombieMesh->getColliderData().m_Center, zombieMesh->getColliderData().m_Radius), 10.0F, 0.0F, true);
 	
+	//tractorObject->getTransform()->setScale(vec3(0.02f, 0.02f, 0.02f));
+	tractorObject->getTransform()->setTranslation(vec3(-15.5f,0.0517222f,13.8f));
+	tractorObject->addComponent(tractorPhysicsObject); 
+	tractorObject->addComponent(new MeshRenderer(zombieMesh, true));
+	worldObject->addChild(tractorObject);
+
+	//animated model 
+	auto* animatedManObject = new GameObject();
+	auto* animatedShader = new Shader("src/Shaders/GLSLShaders/GBufferAnimationShader.vert", "src/Shaders/GLSLShaders/GBufferShader.frag");
+	animatedManObject->addComponent(new AnimatedComponent(new AnimatedModel("Models/model.dae"), animatedShader));
+
 	//worldObject->addChild(animatedManObject); 
+	
+
+
 
 
 	//characters
@@ -119,7 +158,7 @@ void TestGame::init()
 	zombieObject1->getTransform()->setTranslation(vec3(25.f, 3.f, 25.0f));
 	
 	SteeringBehavior* zombieBehavior1 = new SteeringBehavior(*this);
-	zombieBehavior1->m_MaxSpeed = 20.0f; 
+	zombieBehavior1->m_MaxSpeed = 5.0f; 
 	zombieBehavior1->addToList(vec3(25, 0, -25));
 	zombieBehavior1->addToList(vec3(-10, 0, -25));
 	zombieBehavior1->addToList(vec3(25, 0, -25));
@@ -138,7 +177,7 @@ void TestGame::init()
 	zombieObject2->getTransform()->setTranslation(vec3(-20.f, 3.f, -20.0f));
 
 	SteeringBehavior* zombieBehavior2 = new SteeringBehavior(*this);
-	zombieBehavior2->m_MaxSpeed = 20.0f;
+	zombieBehavior2->m_MaxSpeed = 5.0f;
 	zombieBehavior2->addToList(vec3(-5, 0, -20));
 	zombieBehavior2->addToList(vec3(-5, 0, 0));
 	zombieBehavior2->addToList(vec3(-20, 0, 0));
@@ -158,7 +197,7 @@ void TestGame::init()
 	zombieObject3->getTransform()->setTranslation(vec3(20.f, 3.f, -20.0f));
 
 	SteeringBehavior* zombieBehavior3 = new SteeringBehavior(*this);
-	zombieBehavior3->m_MaxSpeed = 20.0f;
+	zombieBehavior3->m_MaxSpeed = 5.0f;
 	zombieBehavior3->addToList(vec3(20, 0, 15));
 	zombieBehavior3->addToList(vec3(5, 0, 15));
 	zombieBehavior3->addToList(vec3(5, 0, 0));
@@ -180,7 +219,7 @@ void TestGame::init()
 	zombieObject4->getTransform()->setTranslation(vec3(-20.f, 3.f, 20.0f));
 
 	SteeringBehavior* zombieBehavior4 = new SteeringBehavior(*this);
-	zombieBehavior4->m_MaxSpeed = 20.0f;
+	zombieBehavior4->m_MaxSpeed = 5.0f;
 	zombieBehavior4->addToList(vec3(-25, 0, 20));
 	zombieBehavior4->addToList(vec3(-25, 0, 5));
 	zombieBehavior4->addToList(vec3(-10, 0, 5));
@@ -195,7 +234,14 @@ void TestGame::init()
 	
 
 
-	
+
+	std::vector<std::string> skyboxFaces;
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_rt.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_lf.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_up.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_dn.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_bk.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_ft.tga");
 	//player
 	auto* playerObject = new GameObject("Player");
 	//playerObject->getTransform()->setTranslation(vec3(0.F, 15.F, 0.0F));
@@ -203,17 +249,17 @@ void TestGame::init()
 
 	auto* camera = new Camera(maths::vec3(0, 0.0F, 0.0F), maths::vec3(0.0F, 1.0F, 0.0F), -89.0F, 0.0F,0.8F, 0.5F, 45.0F, 1.0F, 0.1F, 1000.0F);
 	playerObject->addComponent(camera);
-	playerObject->getTransform()->setTranslation(vec3(10.0f,2.0f, 0.0f)); 
-	PhysicsObject* playerPhysicsObject = new PhysicsObject(new SphereCollider(vec3(10.0f, 0.0f, 0.0f),0.2f),100.0f, vec3(0,0,0),true); 
-	//playerObject->addComponent(playerPhysicsObject); 
+	playerObject->getTransform()->setTranslation(vec3(10.0f,3.0f, 0.0f)); 
+	PhysicsObject* playerPhysicsObject = new PhysicsObject(new SphereCollider(vec3(10.0f, 0.0f, 0.0f),2.0f),10.0f, vec3(0,0,0),true); 
+//	playerObject->addComponent(playerPhysicsObject); 
 	playerObject->addComponent(playerBehavior);
 	playerObject->setName("Player");
 	worldObject->addChild(playerObject);
 	
-	 
-
-
 	addObject(worldObject); 
+	 
+	addToForwardRendererList(Skybox::getInstance(skyboxFaces)); 
+
 	}
 	
 	

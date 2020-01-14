@@ -71,6 +71,7 @@ public:
 		catch (std::runtime_error e)
 		{
 			std::cout << "GET COMPONENT ERROR : "<<e.what() << std::endl; 
+			return nullptr;
 		}
 	}
 

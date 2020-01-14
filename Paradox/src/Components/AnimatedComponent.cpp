@@ -146,7 +146,7 @@ void AnimatedComponent::readNodeHeirarchy(float animationTime,const aiNode * nod
 		// Interpolate scaling and generate scaling transformation matrix
 		
 		vec3 Scaling =  calcInterpolatedScaling( animationTime, nodeAnim); 
-		mat4 scaleMatrix = mat4::Scale(Scaling);
+		mat4 scaleMatrix =mat4::Scale(Scaling);
 
 		// Interpolate rotation and generate rotation transformation matrix
 		quaternion rotation =	calcInterpolatedRotation(animationTime, nodeAnim); 
@@ -158,7 +158,7 @@ void AnimatedComponent::readNodeHeirarchy(float animationTime,const aiNode * nod
 		mat4 translateMatrix = mat4::Translate(Translate);
 
 		//combine transformations....
-		nodeTransformation = translateMatrix * rotationMatrix *  scaleMatrix;
+		nodeTransformation = translateMatrix * rotationMatrix * scaleMatrix ;
 	}
 
 	mat4 GlobalTransformation = parentTransform * nodeTransformation; 

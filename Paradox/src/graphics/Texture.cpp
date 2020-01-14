@@ -1,27 +1,27 @@
 #include "Texture.h"
 namespace Paradox {
 	namespace graphics {
-std::map<std::string, std::shared_ptr<TextureResource>> Texture::m_LoadedTextures; 
+		std::map<std::string, std::shared_ptr<TextureResource>> Texture::m_LoadedTextures;
 		Texture::Texture()
 		{
 		}
 		Texture::Texture(const char* fileLocation)
 		{
 
-			m_FileLocation = std::string(fileLocation); 
-			auto find = m_LoadedTextures.find(m_FileLocation); 
+			m_FileLocation = std::string(fileLocation);
+			auto find = m_LoadedTextures.find(m_FileLocation);
 			if (find != m_LoadedTextures.end())
 			{
 				m_TextureResource = std::shared_ptr<TextureResource>(find->second);
 			}
-			else {
-				
+			else
+			{
 				m_TextureResource = std::make_shared<TextureResource>(load(fileLocation));
-				m_LoadedTextures[m_FileLocation] = m_TextureResource; 
+			m_LoadedTextures[m_FileLocation] = m_TextureResource;
 			}
-		}
+	}
 
-		const TextureResource & Texture::getTextureResource() const
+		const TextureResource& Texture::getTextureResource() const
 		{
 			// TODO: insert return statement here
 			return *m_TextureResource; 

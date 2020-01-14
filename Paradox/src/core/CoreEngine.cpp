@@ -110,7 +110,7 @@ namespace Paradox {
 			return; 
 		}
 		m_Window->CloseWindow(); 
-		abort(); 
+		exit(0); 
 		isRunning = false; 
 	}
 

@@ -206,7 +206,7 @@ namespace Paradox {
 			result.elements[0 * 4 + 0] = ((1.0f - qyqy2) - qzqz2);	result.elements[1 * 4 + 0] = (qxqy2 - qzqw2);	result.elements[2 * 4 + 0] = (qxqz2 + qyqw2);	result.elements[3 * 4 + 0] = 0.0f;
 			result.elements[0 * 4 + 1] = (qxqy2 + qzqw2);	result.elements[1 * 4 + 1] = ((1.0f - qxqx2) - qzqz2);	result.elements[2 * 4 + 1] = (qyqz2 - qxqw2);	result.elements[3 * 4 + 1] = 0.0f;
 			result.elements[0 * 4 + 2] = (qxqz2 - qyqw2);	result.elements[1 * 4 + 2] = (qyqz2 + qxqw2);	result.elements[2 * 4 + 2] = ((1.0f - qxqx2) - qyqy2);	result.elements[3 * 4 + 2] = 0.0f;
-			result.elements[0 * 4 + 3] = 0;		result.elements[1 * 4 + 3] = 0;		result.elements[2 * 4 + 3] = 0;		result.elements[3 * 4 + 3] = 1.0f;
+			result.elements[0 * 4 + 3] = 0.0f;		result.elements[1 * 4 + 3] = 0.0f;		result.elements[2 * 4 + 3] = 0.0f;		result.elements[3 * 4 + 3] = 1.0f;
 
 
 			

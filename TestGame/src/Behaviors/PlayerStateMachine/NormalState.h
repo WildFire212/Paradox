@@ -6,7 +6,6 @@ public:
 		Running , 
 		Walking 
 	};
-	NormalState();
 
 	~NormalState();
 	virtual void entry(PlayerBehavior* playerBehavior) override;
@@ -17,6 +16,7 @@ public:
 private: 
 	NormalStates m_NormalState; 
 	
+	NormalState();
 	void run(PlayerBehavior* playerBehavior,float deltaTime);
 	void walk(PlayerBehavior* playerBehavior,float deltaTime);
 

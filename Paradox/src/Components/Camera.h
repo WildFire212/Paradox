@@ -15,6 +15,7 @@ namespace Paradox {
 			Camera(maths::vec3 startposition, maths::vec3 startUp, GLfloat startpitch, GLfloat startyaw, GLfloat startturnSpeed, GLfloat  startmoveSpeed,GLfloat fov, GLfloat aspectRatio, GLfloat near, GLfloat far);
 			~Camera();
 			auto calculateViewMatrix() const -> maths::mat4;
+			auto calculateViewMatrixGLM() const -> glm::mat4;
 			void updateView() ;
 			void update(float deltaTime) override;
 

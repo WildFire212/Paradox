@@ -178,6 +178,7 @@ namespace Paradox {
 				m_Transform->move(Move); 
 				m_Move = vec3(0, 0, 0); 
 			}
+
 		}
 
 		GameObject::~GameObject()

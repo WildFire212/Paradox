@@ -55,7 +55,7 @@ namespace Paradox {
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, m_GNormal, 0);
-			glBindTexture(GL_TEXTURE_2D, 0);
+			glBindTexture(GL_TEXTURE_2D, 0);		
 
 			//Texture for albedo
 			glGenTextures(1, &m_GAlbedoSpec);
@@ -65,8 +65,36 @@ namespace Paradox {
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, m_GAlbedoSpec, 0);
 			glBindTexture(GL_TEXTURE_2D, 0);
-			unsigned int attachments[3] = { GL_COLOR_ATTACHMENT0 , GL_COLOR_ATTACHMENT1 ,GL_COLOR_ATTACHMENT2 };
-			glDrawBuffers(3, attachments);
+			
+			//Texture for NormalMapping
+			glGenTextures(1, &m_GNormalMapping);
+			glBindTexture(GL_TEXTURE_2D, m_GNormalMapping);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, m_Scrwidth, m_Scrheight, 0, GL_RGB, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, m_GNormalMapping, 0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			//Texture for Tangent
+			glGenTextures(1, &m_GTangent);
+			glBindTexture(GL_TEXTURE_2D, m_GTangent);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, m_Scrwidth, m_Scrheight, 0, GL_RGB, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, m_GTangent, 0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			//Texture for BitTangents
+			glGenTextures(1, &m_GBitTangent);
+			glBindTexture(GL_TEXTURE_2D, m_GBitTangent);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, m_Scrwidth, m_Scrheight, 0, GL_RGB, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT5, GL_TEXTURE_2D, m_GBitTangent, 0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			unsigned int attachments[6] = { GL_COLOR_ATTACHMENT0 , GL_COLOR_ATTACHMENT1 ,GL_COLOR_ATTACHMENT2 ,GL_COLOR_ATTACHMENT3,GL_COLOR_ATTACHMENT4,GL_COLOR_ATTACHMENT5 };
+			glDrawBuffers(6, attachments);
 
 
 			glGenRenderbuffers(1, &m_RbDepth);

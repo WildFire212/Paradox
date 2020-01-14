@@ -19,7 +19,11 @@ void Scene::update(float deltaTime)
 }
 void Scene::render(RenderingEngine & renderingEngine)
 {
+	//scene graph rendering 
 	renderingEngine.render(getRoot()); 
+
+	//also other Forward rendering classes 
+	//renderingEngine.renderForward(m_ForwardRendererList);
 }
 
 
@@ -56,6 +60,11 @@ GameObject * Scene::findObject(std::string name)
 		abort(); 
 	}
 	
+}
+
+auto Scene::addToForwardRendererList(ForwardRenderer* forwardRenderer) -> void
+{
+	m_ForwardRendererList.push_back(forwardRenderer);
 }
 
 

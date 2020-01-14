@@ -27,7 +27,7 @@ namespace Paradox {
 		 auto getParentMatrix() -> const maths::mat4  ; 
 		 auto getTranslation() -> const maths::vec3; 
 		 auto getScale() -> const maths::vec3;
-
+		 auto getRotation() -> const maths::quaternion;
 
 
 		 void setTranslation(maths::vec3 translation); 

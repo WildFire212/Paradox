@@ -4,7 +4,125 @@
 
 namespace Paradox {
 	namespace graphics {
-		void calcAverageNormals(unsigned int * indices, unsigned int indiceCount, GLfloat * vertices, unsigned int verticeCount,
+	
+
+		RenderingEngine::RenderingEngine(int height, int width)
+		{
+			m_GBuffer = new GBuffer(width, height);
+			m_ActiveLight = new Light(); 
+			m_MainCamera = new Camera(); 
+			glClearColor(1.0, 1.0f,1.0f, 1.0f);
+			//glFrontFace(GL_CW);
+			//glCullFace(GL_BACK); 
+			//glEnable(GL_CULL_FACE); 
+			glEnable(GL_DEPTH_TEST); 
+		}
+
+		void RenderingEngine::render(GameObject * gameObject)
+		{
+			//TO DO 
+		
+			if (&getMainCamera() == nullptr)
+			{
+				throw std::runtime_error("there is no camera..");
+			}
+			m_GBuffer->bind(); 
+			glClearColor(0.0, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			
+			//m_GBufferShader->updateAllUniforms(&transform, this, &material);
+			//drawMesh(); 
+			gameObject->renderAll(*this); 
+			
+			m_GBuffer->unbind(); 
+			
+			glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
+			
+		//	glClearColor(1.0f,0.0f, 1.0f, 0.0f);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+			glDepthMask(false);
+			//glDepthFunc(GL_EQUAL);
+			//
+		
+			for (Light* light : m_Lights)
+			{
+				m_ActiveLight = light; 
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GPosition);	//gbuffer
+
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GNormal);
+
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D ,m_GBuffer->m_GAlbedoSpec);
+
+			glActiveTexture(GL_TEXTURE3); 
+			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GNormalMapping); 
+
+			glActiveTexture(GL_TEXTURE4);
+			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GTangent);
+
+			glActiveTexture(GL_TEXTURE5);
+			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GBitTangent);
+
+				light->renderLight(*this); 
+			GBuffer::renderQuad();
+
+			}
+			glDepthFunc(GL_LESS);
+			glDepthMask(true);
+			glDisable(GL_BLEND);
+			
+			
+			//glBindFramebuffer(GL_READ_FRAMEBUFFER,m_GBuffer->getGBuffer());
+			//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
+			////// blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
+			////// the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the 		
+			////// depth buffer in another shader stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
+			//glBlitFramebuffer(0, 0, 800, 800, 0, 0, 800, 800, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+			//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			
+		}
+
+		void RenderingEngine::renderForward(std::list<ForwardRenderer*> forwardRendererList)
+		{
+
+			std::for_each(forwardRendererList.begin(), forwardRendererList.end(), [&](ForwardRenderer* fw) { fw->render(*this); });
+			
+		}
+
+
+
+		void RenderingEngine::addLight(Light * light)
+		{
+			m_Lights.push_back(light); 
+		}
+
+		const Camera & RenderingEngine::getMainCamera() const
+		{
+			// TODO: insert return statement here
+			return *m_MainCamera; 
+		}
+
+		void RenderingEngine::setMainCamera(Camera * camera) 
+		{
+			m_MainCamera = camera; 
+		}
+
+		const Light * RenderingEngine::getActiveLight() const
+		{
+			return m_ActiveLight;
+		}
+
+
+		RenderingEngine::~RenderingEngine()
+		{
+		}
+
+		void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat* vertices, unsigned int verticeCount,
 			unsigned int vLength, unsigned int normalOffset)
 		{
 			for (size_t i = 0; i < indiceCount; i += 3)
@@ -31,9 +149,9 @@ namespace Paradox {
 				vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
 			}
 		}
-		
+
 		void drawMesh() {
-			GLuint VAO, VBO, IBO; 
+			GLuint VAO, VBO, IBO;
 			unsigned int indices[] = {
 	0, 3, 1,
 	1, 3, 2,
@@ -49,8 +167,8 @@ namespace Paradox {
 					0.0f, 1.0f, 0.0f,		0.5f, 1.0f,		0.0f, 0.0f, 0.0f
 			};
 			calcAverageNormals(indices, 12, vertices, 32, 8, 5);
-			int numOfIndices = 12; 
-			int numOfVertices = 32; 
+			int numOfIndices = 12;
+			int numOfVertices = 32;
 
 			glGenVertexArrays(1, &VAO);
 			glBindVertexArray(VAO);
@@ -81,92 +199,5 @@ namespace Paradox {
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
 		}
-
-		RenderingEngine::RenderingEngine(int height, int width)
-		{
-			m_GBuffer = new GBuffer(width, height);
-			m_ActiveLight = new Light(); 
-			m_MainCamera = new Camera(); 
-			glClearColor(1.0, 1.0f,1.0f, 1.0f);
-			//glFrontFace(GL_CW);
-			//glCullFace(GL_BACK); 
-			//glEnable(GL_CULL_FACE); 
-			glEnable(GL_DEPTH_TEST); 
-		}
-
-		void RenderingEngine::render(GameObject * gameObject)
-		{
-			//TO DO 
-
-			if (&getMainCamera() == nullptr)
-			{
-				throw std::runtime_error("there is no camera..");
-			}
-			m_GBuffer->bind(); 
-			glClearColor(0.0, 0.0f,0.0f,1.0f);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-			
-			//m_GBufferShader->updateAllUniforms(&transform, this, &material);
-			//drawMesh(); 
-			gameObject->renderAll(*this); 
-			
-			m_GBuffer->unbind(); 
-			
-			glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
-		//	glClearColor(1.0f,0.0f, 1.0f, 0.0f);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
-			glDepthMask(false);
-			//glDepthFunc(GL_EQUAL);
-			//
-
-			for (Light* light : m_Lights)
-			{
-				m_ActiveLight = light; 
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GPosition);	//gbuffer
-
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, m_GBuffer->m_GNormal);
-
-			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D ,m_GBuffer->m_GAlbedoSpec);
-				light->renderLight(*this); 
-			GBuffer::renderQuad();
-
-			}
-			glDepthFunc(GL_LESS);
-			glDepthMask(true);
-			glDisable(GL_BLEND);
-			
-			
-		}
-
-		void RenderingEngine::addLight(Light * light)
-		{
-			m_Lights.push_back(light); 
-		}
-
-		const Camera & RenderingEngine::getMainCamera() const
-		{
-			// TODO: insert return statement here
-			return *m_MainCamera; 
-		}
-
-		void RenderingEngine::setMainCamera(Camera * camera) 
-		{
-			m_MainCamera = camera; 
-		}
-
-		const Light * RenderingEngine::getActiveLight() const
-		{
-			return m_ActiveLight;
-		}
-
-
-		RenderingEngine::~RenderingEngine()
-		{
-		}
-
 	}
 }

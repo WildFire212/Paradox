@@ -7,12 +7,27 @@ BallBehavior::BallBehavior():
 }
 void BallBehavior::update(float deltaTime)
 {
+	vec3 position = getTransform()->getTranslation();
+	std::cout << "position is" <<position.x<<position.y <<position.z<< std::endl; 
+	
 	static float timer = 0.0f; 
 	timer -= deltaTime; 
 	vec3 direction = vec3(0,0,0);
 	if (timer < 0.0f)
 	{
-		
+		if (Input::getKey(GLFW_KEY_I))
+		{
+			//when friction comes into play 
+			//this->m_Parent->getComponent<PhysicsObject>()->addForce(vec3(1.0f,0,0));
+			this->m_Parent->move(vec3(0.0f, 0.1f, 0));
+			direction += vec3(0.0f, 0.1f, 0.0f);
+		}if (Input::getKey(GLFW_KEY_K))
+		{
+			//when friction comes into play 
+			//this->m_Parent->getComponent<PhysicsObject>()->addForce(vec3(1.0f,0,0));
+			this->m_Parent->move(vec3(0.0f, -0.1f, 0));
+			direction += vec3(0.0f, 0.1f, 0.0f);
+		}
 		if (Input::getKey(GLFW_KEY_W))
 		{
 			//when friction comes into play 
@@ -45,10 +60,10 @@ void BallBehavior::update(float deltaTime)
 	//<<" "<< this->m_Parent->getTransform()->getTranslation().y
 	//<< " " << this->m_Parent->getTransform()->getTranslation().z << std::endl;
 
-		if (Input::getKey(GLFW_KEY_SPACE))
+		//if (Input::getKey(GLFW_KEY_SPACE))
 		{
 		//this->m_Parent->getComponent<Paradox::component::PhysicsObject>()->setVelocity(vec3(5.0f,0.0f,0.0f));
-		this->m_Parent->getComponent<PhysicsObject>()->addForce(vec3(0.0f, 5000.8f, 0.0f)); 
+		//this->m_Parent->getComponent<PhysicsObject>()->addForce(vec3(0.0f, 5000.8f, 0.0f)); 
 		//this->m_Parent->getTransform()->translation += direction; 
 		timer = coolDownTime; 
 		

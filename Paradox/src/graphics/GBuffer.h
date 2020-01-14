@@ -16,7 +16,7 @@ private:
 	
 	//GLuint m_QuadVAO, m_QuadVBO;
 public:
-	GLuint m_GPosition, m_GNormal, m_GAlbedoSpec, m_RbDepth;
+	GLuint m_GPosition, m_GNormal, m_GAlbedoSpec, m_RbDepth,m_GNormalMapping,m_GTangent, m_GBitTangent;
 	GBuffer(int width, int height);
 	void createFrameBuffer();
 	void bind();

@@ -6,7 +6,10 @@ namespace Paradox {namespace graphics{
 #define SHADER_VERTEX_INDEX 0
 #define SHADER_COLOR_INDEX  1
 #define SHADER_NORMAL_INDEX 2
-class MeshRenderer : public Renderer
+#define SHADER_TANGENT_INDEX 3
+#define SHADER_BITANGENT_INDEX 4
+class MeshRenderer
+	: public Renderer
 {
 	protected :
 		bool m_IsBatchRendering; 
@@ -14,6 +17,8 @@ class MeshRenderer : public Renderer
 		maths::vec3 m_Position; 
 		maths::vec2 m_TexCoords; 
 		maths::vec3 m_Normals; 
+		maths::vec3 m_Tangents; 
+		maths::vec3 m_Bitangents; 
 	} *m_BufferMap;
 
 	Mesh* m_Mesh; 

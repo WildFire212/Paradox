@@ -40,6 +40,7 @@ Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushor
 		normals.push_back(0.0f);
 	}
 	m_MeshResource->setNormals(calculateAverageNormals(indices, indexCount, vertices, vertexCount,normals)); 
+	m_MeshResource->calculateTangentSpace(); 
 	calculateColliderData(vertices);
 }
 
@@ -56,6 +57,7 @@ Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushor
 	m_MeshResource->setIndexCount(indexCount);
 	m_MeshResource->setTexCoords(texCoords);
 	m_MeshResource->setMaterial(material);
+	
 	if (calculateNormals == true)
 	{
 		//for (size_t i = 0; i < vertexCount; i++)
@@ -66,6 +68,7 @@ Paradox::graphics::Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLushor
 	}
 	
 	m_MeshResource->setNormals(normals);
+	m_MeshResource->calculateTangentSpace(); 
 	calculateColliderData(vertices);
 
 }

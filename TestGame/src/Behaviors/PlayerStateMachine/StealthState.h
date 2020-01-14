@@ -4,7 +4,6 @@ class StealthState
 	: public PlayerState {
 public:
 
-	StealthState();
 
 ~StealthState();
 virtual void entry(PlayerBehavior* playerBehavior) override;
@@ -15,5 +14,6 @@ private:
 	const float m_HeightOffset; 
 	const float m_PlayerSpeedFactor; 
 private:
+	StealthState();
 	void crouchWalk(PlayerBehavior* playerBehavior, float deltaTime);
 };

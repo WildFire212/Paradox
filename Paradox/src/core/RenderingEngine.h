@@ -1,7 +1,9 @@
 #pragma once
 #include<vector>
+#include<list>
 #include"../Components/Camera.h"
 #include"../graphics/GBuffer.h"
+#include"../graphics/ForwardRenderer.h"
 using namespace Paradox::component; 
 
 using namespace Paradox::core; 
@@ -22,6 +24,7 @@ public:
 	RenderingEngine(int height, int width );
 	~RenderingEngine();
 	void render( GameObject* gameObject); 
+	void renderForward(std::list<ForwardRenderer*> forwardRendererList);
 	void addLight(Light* light); 
 	auto getMainCamera() const -> const Camera&; 
 	void setMainCamera(Camera* camera); 

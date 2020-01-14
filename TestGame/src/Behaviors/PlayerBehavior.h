@@ -10,6 +10,7 @@ public:
 	vec3 m_Velocity; 
 	vec3 m_Heading; 
 private: 
+	const float coolDownTime;
 public :
 	PlayerBehavior(); 
 	~PlayerBehavior(); 

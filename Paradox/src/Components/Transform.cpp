@@ -1,6 +1,7 @@
 #include "Transform.h"
 #include"../core/GameObject.h"
 using namespace Paradox::maths; 
+
 namespace Paradox {
 	Transform::Transform() :
 		translation(0.0f, 0.0f, 0.0f),
@@ -22,7 +23,7 @@ namespace Paradox {
 		}
 		else {
 			m_oldTranslation = translation + 0.1f; //vec3(0, 0, 0)+ (1.0f); 
-				m_oldRot = rotation.Multiply(0.5f);//quaternion(0,0,0,0).Multiply(0.5f);
+				m_oldRot = quaternion(0, 0, 0, 0).Multiply(0.5f);//rotation.Multiply(0.5f);//quaternion(0,0,0,0).Multiply(0.5f);
 				m_oldScale = scale + 1.0f;//vec3(0, 0, 0) + 1.0f;
 		
 		}
@@ -81,6 +82,11 @@ namespace Paradox {
 		return scale;
 
 	}
+
+	 auto Transform::getRotation() -> const maths::quaternion
+	 {
+		 return rotation;
+	 }
 
  void Transform::setTranslation(maths::vec3 translation)
 {

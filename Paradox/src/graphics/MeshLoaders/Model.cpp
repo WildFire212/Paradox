@@ -70,7 +70,8 @@ namespace Paradox {
 			std::vector<GLfloat> texCoords;
 			std::vector<GLushort> indices;
 			std::vector<GLfloat> normals;
-
+			std::vector<GLfloat> tangents; 
+			std::vector<GLfloat> bitangents; 
 			for (size_t i = 0; i < mesh->mNumVertices; i++) {
 				//vertices
 				vertices.insert(vertices.end(), { mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z });
@@ -116,6 +117,8 @@ namespace Paradox {
 				}
 				//normals 
 				normals.insert(normals.end(), { -mesh->mNormals[i].x,-mesh->mNormals[i].y ,-mesh->mNormals[i].z });
+				tangents.insert(tangents.end(), { mesh->mTangents[i].x, mesh->mTangents[i].y,mesh->mTangents[i].z }); 
+				bitangents.insert(bitangents.end(), { mesh->mBitangents[i].x, mesh->mBitangents[i].y,mesh->mBitangents[i].z });
 			}
 
 			for (size_t i = 0; i < mesh->mNumFaces; i++) {
@@ -128,7 +131,7 @@ namespace Paradox {
 
 			}
 
-			MeshResource* meshResource = new MeshResource(vertices, indices, texCoords, normals, nullptr);
+			MeshResource* meshResource = new MeshResource(vertices, indices, texCoords, normals, nullptr, tangents, bitangents);
 
 
 			m_MeshToTex.push_back(mesh->mMaterialIndex);
